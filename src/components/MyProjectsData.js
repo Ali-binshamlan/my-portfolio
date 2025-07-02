@@ -19,7 +19,9 @@ export const projects = [
       technologies: [
         "React.js", "React Router", "Axios", "React Hook Form", "Yup",
         "Context API", "Bootstrap 5", "SweetAlert2", "Framer Motion", "JWT",
-      ],
+    ],
+    detailsUrl: "/projects/ai-radiologist", 
+
     },
     {
       id: "ai-radiologist-admin",
@@ -42,6 +44,8 @@ export const projects = [
         "Context API", "JWT", "SweetAlert2", "React Toastify",
         "Bootstrap 5", "Framer Motion",
       ],
+      detailsUrl: "/projects/ai-radiologist-admin",
+
     },
     {
       id: "tarf-ecommerce",
@@ -63,6 +67,8 @@ export const projects = [
         "Next.js", "Tailwind CSS", "Redux", "Axios",
         "REST APIs", "React Toastify", "React Hook Form", "Yup", "Context API",
       ],
+      detailsUrl: "/projects/tarf-ecommerce",
+
     },
     {
       id: "movie-web-app",
@@ -85,6 +91,8 @@ export const projects = [
         "Next.js", "React.js", "Tailwind CSS", "Swiper.js",
         "Axios", "REST APIs",
       ],
+      detailsUrl: "/projects/movie-web-app",
+
     },
   ];
   

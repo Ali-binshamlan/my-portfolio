@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa";
+
+
 const projects = [
   {
     id: "ai-radiologist",
@@ -137,6 +140,16 @@ export default function MyProjects() {
             </div>
           </motion.div>
         ))}
+      </div>
+      <div className="text-center mt-8">
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold 
+                     bg-gradient-to-r from-purple-600 to-purple-700 
+                     text-white hover:brightness-110 transition"
+        >
+          View All Projects <FaArrowRight />
+        </Link>
       </div>
     </section>
   );
