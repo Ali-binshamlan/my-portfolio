@@ -18,10 +18,23 @@ export default function Navbar() {
         </Link>
         {/* Desktop Links */}
         <ul className="hidden md:flex gap-8 text-lg">
-          <Link to="/"><li className="hover:text-yellow-300 cursor-pointer">Home</li></Link>
-          <Link to="/projects"><li className="hover:text-yellow-300 cursor-pointer">Projects</li></Link>
-          <Link to="/Contact"><li className="hover:text-yellow-300 cursor-pointer">Contact</li></Link>
-        </ul>
+  <Link to="/">
+    <li className="hover:text-purple-600 hover:underline underline-offset-4 transition duration-300 cursor-pointer">
+      Home
+    </li>
+  </Link>
+  <Link to="/projects">
+    <li className="hover:text-purple-600 hover:underline underline-offset-4 transition duration-300 cursor-pointer">
+      Projects
+    </li>
+  </Link>
+  <Link to="/Contact">
+    <li className="hover:text-purple-600 hover:underline underline-offset-4 transition duration-300 cursor-pointer">
+      Contact
+    </li>
+  </Link>
+</ul>
+
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
@@ -33,12 +46,25 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <ul className="md:hidden mt-4 space-y-4 text-center text-lg">
-          <Link to="/"><li className="hover:text-yellow-300 cursor-pointer">Home</li></Link>
-          <Link to="/projects"><li className="hover:text-yellow-300 cursor-pointer">Projects</li></Link>
-          <Link to="/Contact"><li className="hover:text-yellow-300 cursor-pointer">Contact</li></Link>
-        </ul>
-      )}
+  <ul className="md:hidden mt-4 space-y-4 text-center text-lg">
+    <Link to="/">
+      <li className="hover:text-purple-600 hover:underline underline-offset-4 transition duration-300 cursor-pointer">
+        Home
+      </li>
+    </Link>
+    <Link to="/projects">
+      <li className="hover:text-purple-600 hover:underline underline-offset-4 transition duration-300 cursor-pointer">
+        Projects
+      </li>
+    </Link>
+    <Link to="/Contact">
+      <li className="hover:text-purple-600 hover:underline underline-offset-4 transition duration-300 cursor-pointer">
+        Contact
+      </li>
+    </Link>
+  </ul>
+)}
+
     </nav>
   );
 }
