@@ -34,8 +34,8 @@ export default function MyProjects() {
                 {project.title}
               </h3>
               <p className="text-gray-700 mb-5 flex-grow whitespace-pre-line">
-  {project.description}
-</p>
+                {project.description}
+              </p>
 
 
 
