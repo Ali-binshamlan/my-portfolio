@@ -35,7 +35,7 @@ export default function HeroSection() {
           Front-End Developer specializing in React.js with a background in Computer Engineering. Strong
           experience in building modern, responsive, and user-focused web applications. Skilled in
           transforming UI/UX designs into high-performance, interactive interfaces using HTML, CSS,
-          JavaScript, and modern front-end tools like React Router, Axios, Zustand, and Tailwind CSS.
+          JavaScript, and modern front-end tools like React Router, Axios, Redux, and Tailwind CSS.
           Bootstrap 5, Passionate about clean code, performance, and continuous learning.
         </p>
 
@@ -54,7 +54,7 @@ export default function HeroSection() {
 
           {/* زر السيرة */}
           <motion.a
-            href="/Ali-CV.pdf"
+            href="https://drive.google.com/file/d/18_gnwyhdea0MMuhQLXtNo_1RsUdmvRO-/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}

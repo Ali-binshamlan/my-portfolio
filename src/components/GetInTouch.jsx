@@ -9,7 +9,7 @@ export default function GetInTouch() {
       className="bg-purple-50 py-20 px-6 lg:px-20"
     >
       <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-lg p-12">
-        <h2 className="text-4xl font-extrabold text-center text-purple-800 mb-14">
+        <h2 className="text-4xl font-extrabold text-center text-black mb-14">
           Get In Touch
         </h2>
 
@@ -59,7 +59,7 @@ export default function GetInTouch() {
             {/* Resume */}
             <motion.a
               whileHover={{ scale: 1.05 }}
-              href="/resume.pdf"
+              href="https://drive.google.com/file/d/18_gnwyhdea0MMuhQLXtNo_1RsUdmvRO-/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 bg-gray-100 text-gray-700 shadow-md border px-6 py-4 rounded-xl hover:bg-gray-200 transition font-semibold whitespace-nowrap"

@@ -13,14 +13,14 @@ export default function Navbar() {
     <nav className="text-black bg-transparent py-4 px-6 shadow-md">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Logo */}
+        <Link to="/">
         <h1 className="text-2xl font-bold">Ali</h1>
-
+        </Link>
         {/* Desktop Links */}
         <ul className="hidden md:flex gap-8 text-lg">
-          <li className="hover:text-yellow-300 cursor-pointer">Home</li>
-          <li className="hover:text-yellow-300 cursor-pointer">About</li>
+          <Link to="/"><li className="hover:text-yellow-300 cursor-pointer">Home</li></Link>
           <Link to="/projects"><li className="hover:text-yellow-300 cursor-pointer">Projects</li></Link>
-          <li className="hover:text-yellow-300 cursor-pointer">Contact</li>
+          <Link to="/Contact"><li className="hover:text-yellow-300 cursor-pointer">Contact</li></Link>
         </ul>
 
         {/* Mobile Menu Button */}
@@ -34,10 +34,9 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <ul className="md:hidden mt-4 space-y-4 text-center text-lg">
-          <li className="hover:text-yellow-300 cursor-pointer">Home</li>
-          <li className="hover:text-yellow-300 cursor-pointer">About</li>
-          <li className="hover:text-yellow-300 cursor-pointer">Projects</li>
-          <li className="hover:text-yellow-300 cursor-pointer">Contact</li>
+          <Link to="/"><li className="hover:text-yellow-300 cursor-pointer">Home</li></Link>
+          <Link to="/projects"><li className="hover:text-yellow-300 cursor-pointer">Projects</li></Link>
+          <Link to="/Contact"><li className="hover:text-yellow-300 cursor-pointer">Contact</li></Link>
         </ul>
       )}
     </nav>

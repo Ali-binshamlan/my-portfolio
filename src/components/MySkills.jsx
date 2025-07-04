@@ -49,7 +49,7 @@ const skillCategories = [
 export default function MySkills() {
   return (
     <section id="skills" className="bg-gradient-to-br from-purple-50 to-white py-20 px-6 lg:px-20">
-      <h2 className="text-4xl font-extrabold text-center text-purple-800 mb-14">
+      <h2 className="text-4xl font-extrabold text-center text-black mb-14">
         My Skills
       </h2>
 

@@ -1,4 +1,3 @@
-// App.jsx
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
@@ -7,13 +6,14 @@ import MyProjects from "./components/MyProjects";
 import ProjectDetails from "./components/ProjectDetails";
 import MySkills from "./components/MySkills";
 import GetInTouch from "./components/GetInTouch";
-import Projects from "./components/Projects"
-
+import Projects from "./components/Projects";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <>
       <Navbar />
+      <ScrollToTop /> 
       <Routes>
         <Route
           path="/"
@@ -39,6 +39,7 @@ export default function App() {
         />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:projectId" element={<ProjectDetails />} />
+        <Route path="/Contact" element={<GetInTouch />} />
       </Routes>
     </>
   );
