@@ -3,11 +3,19 @@ export const projects = [
     id: "ai-radiologist",
     title: "AI-Radiologist (Medical Imaging Platform)",
     demo: "https://mohammed-invs7.github.io/AI_Radiologist/",
+    ved:"https://drive.google.com/drive/folders/1riq5aVGt87GF9kAm3LzGFodv6VH8AhD_?usp=sharing",
     image: "/ai-radiologist.png", // الصورة الرئيسية
     screenshots: [
       "/screenshots/ai-radiologist-1.png",
       "/screenshots/ai-radiologist-2.png",
       "/screenshots/ai-radiologist-3.png",
+      "/screenshots/ai-radiologist-4.png",
+      "/screenshots/ai-radiologist-5.png",
+      "/screenshots/ai-radiologist-6.png",
+      "/screenshots/ai-radiologist-7.png",
+      "/screenshots/ai-radiologist-8.png",
+      "/screenshots/ai-radiologist-9.png",
+
     ],
     description:
       "A responsive medical imaging platform that allows users to upload and analyze X-ray images using AI-powered diagnostics. It includes secure authentication, dynamic routing, user/admin dashboards, and full report management.",
@@ -38,10 +46,13 @@ export const projects = [
   {
     id: "ai-radiologist-admin",
     title: "AI-Radiologist Admin Dashboard",
+    ved:"https://drive.google.com/drive/folders/18u6i-OpWDY6iGxmnaSj6O53BT40VfikH?usp=sharing",
     image: "/ai-radiologist.png",
     screenshots: [
       "/screenshots/ai-radiologist-admin-1.png",
       "/screenshots/ai-radiologist-admin-2.png",
+      "/screenshots/ai-radiologist-admin-3.png",
+      "/screenshots/ai-radiologist-admin-4.png",
     ],
     description:
       "A standalone admin dashboard for managing users, reports, and AI diagnostic models. Features include CRUD operations, role and status management, secure admin-only routes, and responsive design.",
@@ -73,10 +84,13 @@ export const projects = [
   {
     id: "tarf-ecommerce",
     title: "TARF (E-Commerce Web App)",
+    ved: "https://drive.google.com/drive/folders/1fWH-A-KpLXpG1CT7iJsfmGJNgpb83alN?usp=sharing",
     image: "/tarf.png",
     screenshots: [
       "/screenshots/tarf-1.png",
       "/screenshots/tarf-2.png",
+      "/screenshots/tarf-3.png",
+      "/screenshots/tarf-4.png",
     ],
     description:
       "A modern online store built with Next.js and Tailwind CSS. Supports product listings, detailed product pages, shopping cart, and checkout with Redux state management for user sessions.",
