@@ -54,7 +54,7 @@ export default function MyProjects() {
                 {project.detailsUrl && (
                   <button
                     onClick={() => navigate(project.detailsUrl)}
-                    className="px-5 py-2 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition font-semibold"
+                    className="px-5 py-2 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition font-semibold cursor-pointer"
                   >
                     View Details
                   </button>

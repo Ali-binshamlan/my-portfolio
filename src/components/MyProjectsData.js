@@ -126,6 +126,9 @@ export const projects = [
       "/screenshots/movie-web-app-1.png",
       "/screenshots/movie-web-app-2.png",
       "/screenshots/movie-web-app-3.png",
+      "/screenshots/movie-web-app-4.png",
+      "/screenshots/movie-web-app-5.png",
+      "/screenshots/movie-web-app-6.png",
     ],
     description:
       "A movie browsing app featuring category filters, genre pages, and detailed movie information. Uses TMDB API with responsive carousels and dynamic routing.",

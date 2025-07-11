@@ -95,7 +95,7 @@ export default function ProjectDetails() {
       {/* Modal لتكبير الصورة */}
       {modalImage && (
         <div
-          className="fixed inset-0 bg-amber-50 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50 cursor-pointer"
+          className="fixed inset-0 bg-gray-100 bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50 cursor-pointer"
           onClick={() => setModalImage(null)}
         >
           <img
