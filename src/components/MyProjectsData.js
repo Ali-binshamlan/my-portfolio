@@ -2,7 +2,7 @@ export const projects = [
   {
     id: "ai-radiologist",
     title: "AI-Radiologist (Medical Imaging Platform)",
-    demo: "https://mohammed-invs7.github.io/AI_Radiologist/",
+    demo: "https://ai-radiologist.vercel.app/",
     ved:"https://drive.google.com/drive/folders/1riq5aVGt87GF9kAm3LzGFodv6VH8AhD_?usp=sharing",
     image: "/ai-radiologist.png", // الصورة الرئيسية
     screenshots: [
