@@ -15,6 +15,7 @@ export const projects = [
       "/screenshots/ai-radiologist-7.png",
       "/screenshots/ai-radiologist-8.png",
       "/screenshots/ai-radiologist-9.png",
+      "/screenshots/ai-radiologist-10.png",
 
     ],
     description:
@@ -129,6 +130,7 @@ export const projects = [
       "/screenshots/movie-web-app-4.png",
       "/screenshots/movie-web-app-5.png",
       "/screenshots/movie-web-app-6.png",
+      "/screenshots/movie-web-app-7.png",
     ],
     description:
       "A movie browsing app featuring category filters, genre pages, and detailed movie information. Uses TMDB API with responsive carousels and dynamic routing.",
