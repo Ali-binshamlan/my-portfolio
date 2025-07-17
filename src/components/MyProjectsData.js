@@ -154,4 +154,38 @@ export const projects = [
     ],
     detailsUrl: "/projects/movie-web-app",
   },
+  {
+  id: "furnishop",
+  title: "FurniShop (Furniture E-Commerce Site)",
+  demo: "https://furnishop-two-delta.vercel.app/", // إن وجد رابط مباشر
+  ved: "https://drive.google.com/drive/folders/your-folder-id", // غيّره إذا كان عندك فيديو
+  image: "/furnishop.png",
+  screenshots: [
+    "/screenshots/furnishop-1.png",
+    "/screenshots/furnishop-2.png",
+
+  ],
+  description:
+    "FurniShop is an online store specializing in furniture and home decor, allowing users to browse products smoothly through a well-organized, responsive slider that works seamlessly across all devices.",
+  keyFeatures: [
+    "Showcase furniture products in a clean and user-friendly layout.",
+    "Responsive product slider for smooth navigation across devices.",
+    "Well-structured product pages and visual browsing experience.",
+  ],
+  challenges: [
+    "Creating a mobile-first responsive design.",
+    "Implementing smooth and optimized slider components.",
+    "Maintaining consistent UX across devices.",
+  ],
+  technologies: [
+    "React.js",
+    "React Router",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Swiper.js",
+    "Axios",
+  ],
+  detailsUrl: "/projects/furnishop",
+}
+
 ];
