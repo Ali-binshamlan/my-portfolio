@@ -158,7 +158,7 @@ export const projects = [
   id: "furnishop",
   title: "FurniShop (Furniture E-Commerce Site)",
   demo: "https://furnishop-two-delta.vercel.app/", // إن وجد رابط مباشر
-  ved: "https://drive.google.com/drive/folders/your-folder-id", // غيّره إذا كان عندك فيديو
+  ved: "https://drive.google.com/drive/folders/1uDtjFFvcM3yg4PaNMhXj4c1ssYbLthNu?usp=sharing", // غيّره إذا كان عندك فيديو
   image: "/furnishop.png",
   screenshots: [
     "/screenshots/furniShop-1.png",
