@@ -108,6 +108,7 @@ export default function MyProjects() {
                     src={project.image}
                     alt={project.title}
                     className="max-h-full max-w-full object-contain"
+                    loading="lazy"
                   />
                 </div>
     

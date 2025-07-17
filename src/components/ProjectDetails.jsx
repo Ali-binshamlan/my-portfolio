@@ -102,6 +102,7 @@ export default function ProjectDetails() {
             src={modalImage}
             alt="Enlarged screenshot"
             className="max-w-[90vw] max-h-[90vh] rounded-lg shadow-lg"
+            loading="lazy"
             onClick={(e) => e.stopPropagation()} // لمنع غلق المودال عند الضغط على الصورة نفسها
           />
         </div>

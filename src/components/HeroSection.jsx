@@ -15,6 +15,8 @@ export default function HeroSection() {
           src="/profile.jpg"
           alt="Ali profile"
           className="w-36 h-36 md:w-60 md:h-60 rounded-full object-cover transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+          loading="lazy"
+
         />
       </motion.div>
 
