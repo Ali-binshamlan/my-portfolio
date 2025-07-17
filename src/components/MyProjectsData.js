@@ -161,8 +161,8 @@ export const projects = [
   ved: "https://drive.google.com/drive/folders/your-folder-id", // غيّره إذا كان عندك فيديو
   image: "/furnishop.png",
   screenshots: [
-    "/screenshots/furnishop-1.png",
-    "/screenshots/furnishop-2.png",
+    "/screenshots/furniShop-1.png",
+    "/screenshots/furniShop-2.png",
 
   ],
   description:
