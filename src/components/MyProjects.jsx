@@ -5,85 +5,6 @@ import { FaArrowRight } from "react-icons/fa";
 import { projects } from "./MyProjectsData";
 
 
-// const projects = [
-//   {
-//     id: "ai-radiologist",
-//     title: "AI-Radiologist (Medical Imaging Platform)",
-//     demo: "https://ai-radiologist.vercel.app/",
-//     image: "/ai-radiologist.png",
-//     description:
-//       "Responsive medical platform for uploading and analyzing X-ray images using AI. Includes authentication, routing, protected dashboards, and user/admin interfaces.",
-//     tech: [
-//       "React.js",
-//       "React Router",
-//       "Axios",
-//       "React Hook Form",
-//       "Yup",
-//       "Context API",
-//       "Bootstrap 5",
-//       "SweetAlert2",
-//       "Framer Motion",
-//       "JWT",
-//     ],
-//     detailsUrl: "/projects/ai-radiologist", // رابط تفاصيل المشروع (داخل الموقع)
-//   },
-//   {
-//     id: "ai-radiologist-admin",
-//     title: "AI-Radiologist Admin Dashboard",
-//     image: "/ai-radiologist.png",
-//     description:
-//       "Standalone admin panel for managing users, reports, and AI models. Secure routes, CRUD operations with modals, and animated user feedback.",
-//     tech: [
-//       "React.js",
-//       "React Router",
-//       "Axios",
-//       "Yup",
-//       "React Hook Form",
-//       "JWT",
-//       "Framer Motion",
-//       "Bootstrap 5",
-//       "React Toastify",
-//       "SweetAlert2",
-//     ],
-//     detailsUrl: "/projects/ai-radiologist-admin",
-//   },
-//   {
-//     id: "tarf-ecommerce",
-//     title: "TARF (E-Commerce Web App)",
-//     image: "/tarf.png",
-//     description:
-//       "Modern online store built with Next.js and Tailwind CSS. Includes product listing, detail pages, cart system, and checkout. State management handled via Redux.",
-//     tech: [
-//       "Next.js",
-//       "Tailwind CSS",
-//       "Redux",
-//       "Axios",
-//       "REST APIs",
-//       "React Toastify",
-//       "React Hook Form",
-//       "Yup",
-//       "Context API",
-//     ],
-//     detailsUrl: "/projects/tarf-ecommerce",
-//   },
-//   {
-//     id: "movie-web-app",
-//     title: "Movie Web App",
-//     demo: "https://movie-web-app-lilac.vercel.app/",
-//     image: "/movie.png",
-//     description:
-//       "Movie browsing web app using TMDB API. Features include category filters, genre pages, movie details, and sliders. Built with Next.js and Swiper.js.",
-//     tech: [
-//       "Next.js",
-//       "React.js",
-//       "Tailwind CSS",
-//       "Swiper.js",
-//       "Axios",
-//       "REST APIs",
-//     ],
-//     detailsUrl: "/projects/movie-web-app",
-//   },
-// ];
 
 export default function MyProjects() {
   const navigate = useNavigate();
@@ -95,7 +16,7 @@ export default function MyProjects() {
           </h2>
     
           <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
-            {projects.map((project, index) => (
+            {projects.slice(0,4).map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }}
