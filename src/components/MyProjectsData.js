@@ -82,43 +82,40 @@ export const projects = [
     ],
     detailsUrl: "/projects/ai-radiologist-admin",
   },
-  {
-    id: "tarf-ecommerce",
-    title: "TARF (E-Commerce Web App)",
-    ved: "https://drive.google.com/drive/folders/1fWH-A-KpLXpG1CT7iJsfmGJNgpb83alN?usp=sharing",
-    image: "/tarf.png",
-    screenshots: [
-      "/screenshots/tarf-1.png",
-      "/screenshots/tarf-2.png",
-      "/screenshots/tarf-3.png",
-      "/screenshots/tarf-4.png",
-    ],
-    description:
-      "A modern online store built with Next.js and Tailwind CSS. Supports product listings, detailed product pages, shopping cart, and checkout with Redux state management for user sessions.",
-    keyFeatures: [
-      "Product listing, details, shopping cart, and checkout.",
-      "Redux state management for cart and user sessions.",
-      "SEO-friendly routing with Next.js.",
-    ],
-    challenges: [
-      "Cart state persistence.",
-      "API data integration for products and user flow.",
-      "Optimized mobile-first layout.",
-    ],
-    technologies: [
-      "Next.js",
-      "Tailwind CSS",
-      "Redux",
-      "Axios",
-      "REST APIs",
-      "React Toastify",
-      "React Hook Form",
-      "Yup",
-      "Context API",
-    ],
-    detailsUrl: "/projects/tarf-ecommerce",
+   {
+  id: "furnishop",
+  title: "FurniShop (Furniture E-Commerce Site)",
+  demo: "https://furnishop-two-delta.vercel.app/", // إن وجد رابط مباشر
+  ved: "https://drive.google.com/drive/folders/1uDtjFFvcM3yg4PaNMhXj4c1ssYbLthNu?usp=sharing", // غيّره إذا كان عندك فيديو
+  image: "/furnishop.png",
+  screenshots: [
+    "/screenshots/furniShop-1.png",
+    "/screenshots/furniShop-2.png",
+
+  ],
+  description:
+    "FurniShop is an online store specializing in furniture and home decor, allowing users to browse products smoothly through a well-organized, responsive slider that works seamlessly across all devices.",
+  keyFeatures: [
+    "Showcase furniture products in a clean and user-friendly layout.",
+    "Responsive product slider for smooth navigation across devices.",
+    "Well-structured product pages and visual browsing experience.",
+  ],
+  challenges: [
+    "Creating a mobile-first responsive design.",
+    "Implementing smooth and optimized slider components.",
+    "Maintaining consistent UX across devices.",
+  ],
+  technologies: [
+    "React.js",
+    "React Router",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Swiper.js",
+    "Axios",
+  ],
+  detailsUrl: "/projects/furnishop",
   },
-  {
+{
     id: "movie-web-app",
     title: "Movie Web App",
     demo: "https://movie-web-app-lilac.vercel.app/",
@@ -155,37 +152,39 @@ export const projects = [
     detailsUrl: "/projects/movie-web-app",
   },
   {
-  id: "furnishop",
-  title: "FurniShop (Furniture E-Commerce Site)",
-  demo: "https://furnishop-two-delta.vercel.app/", // إن وجد رابط مباشر
-  ved: "https://drive.google.com/drive/folders/1uDtjFFvcM3yg4PaNMhXj4c1ssYbLthNu?usp=sharing", // غيّره إذا كان عندك فيديو
-  image: "/furnishop.png",
-  screenshots: [
-    "/screenshots/furniShop-1.png",
-    "/screenshots/furniShop-2.png",
-
-  ],
-  description:
-    "FurniShop is an online store specializing in furniture and home decor, allowing users to browse products smoothly through a well-organized, responsive slider that works seamlessly across all devices.",
-  keyFeatures: [
-    "Showcase furniture products in a clean and user-friendly layout.",
-    "Responsive product slider for smooth navigation across devices.",
-    "Well-structured product pages and visual browsing experience.",
-  ],
-  challenges: [
-    "Creating a mobile-first responsive design.",
-    "Implementing smooth and optimized slider components.",
-    "Maintaining consistent UX across devices.",
-  ],
-  technologies: [
-    "React.js",
-    "React Router",
-    "Tailwind CSS",
-    "Framer Motion",
-    "Swiper.js",
-    "Axios",
-  ],
-  detailsUrl: "/projects/furnishop",
-}
-
+    id: "tarf-ecommerce",
+    title: "TARF (E-Commerce Web App)",
+    ved: "https://drive.google.com/drive/folders/1fWH-A-KpLXpG1CT7iJsfmGJNgpb83alN?usp=sharing",
+    image: "/tarf.png",
+    screenshots: [
+      "/screenshots/tarf-1.png",
+      "/screenshots/tarf-2.png",
+      "/screenshots/tarf-3.png",
+      "/screenshots/tarf-4.png",
+    ],
+    description:
+      "A modern online store built with Next.js and Tailwind CSS. Supports product listings, detailed product pages, shopping cart, and checkout with Redux state management for user sessions.",
+    keyFeatures: [
+      "Product listing, details, shopping cart, and checkout.",
+      "Redux state management for cart and user sessions.",
+      "SEO-friendly routing with Next.js.",
+    ],
+    challenges: [
+      "Cart state persistence.",
+      "API data integration for products and user flow.",
+      "Optimized mobile-first layout.",
+    ],
+    technologies: [
+      "Next.js",
+      "Tailwind CSS",
+      "Redux",
+      "Axios",
+      "REST APIs",
+      "React Toastify",
+      "React Hook Form",
+      "Yup",
+      "Context API",
+    ],
+    detailsUrl: "/projects/tarf-ecommerce",
+  },
 ];
