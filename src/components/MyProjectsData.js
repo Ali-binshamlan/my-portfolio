@@ -1,7 +1,7 @@
 export const projects = [
   {
     id: "ai-radiologist",
-    title: "AI-Radiologist (Medical Imaging Platform)",
+    title: "AI-Radiologist",
     demo: "https://ai-radiologist.vercel.app/",
     ved:"https://drive.google.com/drive/folders/1riq5aVGt87GF9kAm3LzGFodv6VH8AhD_?usp=sharing",
     image: "/ai-radiologist.png", // الصورة الرئيسية
@@ -83,42 +83,42 @@ export const projects = [
     detailsUrl: "/projects/ai-radiologist-admin",
   },
   
-{
-    id: "movie-web-app",
-    title: "Movie Web App",
-    demo: "https://movie-web-app-lilac.vercel.app/",
-    image: "/movie.png",
-    screenshots: [
-      "/screenshots/movie-web-app-1.png",
-      "/screenshots/movie-web-app-2.png",
-      "/screenshots/movie-web-app-3.png",
-      "/screenshots/movie-web-app-4.png",
-      "/screenshots/movie-web-app-5.png",
-      "/screenshots/movie-web-app-6.png",
-      "/screenshots/movie-web-app-7.png",
-    ],
-    description:
-      "A movie browsing app featuring category filters, genre pages, and detailed movie information. Uses TMDB API with responsive carousels and dynamic routing.",
-    keyFeatures: [
-      "Movie browsing with category filters and genre pages.",
-      "Detailed pages using TMDB API.",
-      "Sliders and carousels built with Swiper.js.",
-    ],
-    challenges: [
-      "Handling API rate limits and dynamic content.",
-      "Responsive carousel design.",
-      "Efficient data loading and pagination.",
-    ],
-    technologies: [
-      "Next.js",
-      "React.js",
-      "Tailwind CSS",
-      "Swiper.js",
-      "Axios",
-      "REST APIs",
-    ],
-    detailsUrl: "/projects/movie-web-app",
-  },
+// {
+//     id: "tabayyun",
+//     title: "Tabayyun",
+//     demo: "https://tabayyun.vercel.app/",
+//     image: "/TABAYYUN_Dark.png",
+//     screenshots: [
+//       "/screenshots/Tabayyun-1.png",
+//       "/screenshots/Tabayyun-2.png",
+//       "/screenshots/Tabayyun-3.png",
+//       "/screenshots/Tabayyun-4.png",
+//       "/screenshots/Tabayyun-5.png",
+//     ],
+//     description:
+//     "Tabayyun Business is a leading Saudi cybersecurity company committed to combating digital fraud across B2C, B2B, and B2G sectors",
+//       keyFeatures: [
+//   "Company and organization browsing with verified information.",
+//   "Trusted identity verification system with official badges.",
+//   "Interactive and modern UI built with React and Tailwind CSS.",
+//   "Filtering companies by category or business type.",
+//   "Detailed company pages with complete and transparent data.",
+// ],
+
+//     challenges: [
+//       "Handling API rate limits and dynamic content.",
+//       "Responsive carousel design.",
+//       "Efficient data loading and pagination.",
+//     ],
+//     technologies: [
+//       "Next.js",
+//       "React.js",
+//       "Tailwind CSS",
+//       "Axios",
+//       "REST APIs",
+//     ],
+//     detailsUrl: "/projects/tabayyun",
+//   },
   {
     id: "tarf-ecommerce",
     title: "TARF (E-Commerce Web App)",
@@ -155,6 +155,42 @@ export const projects = [
       "Context API",
     ],
     detailsUrl: "/projects/tarf-ecommerce",
+  },
+  {
+    id: "movie-web-app",
+    title: "Movie Web App",
+    demo: "https://movie-web-app-lilac.vercel.app/",
+    image: "/movie.png",
+    screenshots: [
+      "/screenshots/movie-web-app-1.png",
+      "/screenshots/movie-web-app-2.png",
+      "/screenshots/movie-web-app-3.png",
+      "/screenshots/movie-web-app-4.png",
+      "/screenshots/movie-web-app-5.png",
+      "/screenshots/movie-web-app-6.png",
+      "/screenshots/movie-web-app-7.png",
+    ],
+    description:
+      "A movie browsing app featuring category filters, genre pages, and detailed movie information. Uses TMDB API with responsive carousels and dynamic routing.",
+    keyFeatures: [
+      "Movie browsing with category filters and genre pages.",
+      "Detailed pages using TMDB API.",
+      "Sliders and carousels built with Swiper.js.",
+    ],
+    challenges: [
+      "Handling API rate limits and dynamic content.",
+      "Responsive carousel design.",
+      "Efficient data loading and pagination.",
+    ],
+    technologies: [
+      "Next.js",
+      "React.js",
+      "Tailwind CSS",
+      "Swiper.js",
+      "Axios",
+      "REST APIs",
+    ],
+    detailsUrl: "/projects/movie-web-app",
   },
    {
   id: "furnishop",

@@ -19,19 +19,19 @@ export default function App() {
           path="/"
           element={
             <>
-              <div className="mt-10">
+              <div className="">
                 <HeroSection />
               </div>
-              <div className="mt-10">
+              <div className="">
                 <WorkExperience />
               </div>
-              <div className="mt-10">
+              <div className="">
                 <MyProjects />
               </div>
-              <div className="mt-10">
+              <div className="">
                 <MySkills />
               </div>
-              <div className="mt-10">
+              <div className="">
                 <GetInTouch />
               </div>
             </>

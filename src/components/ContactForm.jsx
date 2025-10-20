@@ -2,7 +2,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,8 +18,10 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h3 className="text-2xl font-semibold mb-6 text-center">Send Me a Message</h3>
+    <section className="max-w-lg mx-auto p-6 bg-gray-900 rounded-lg shadow-lg border border-gray-800">
+      <h3 className="text-2xl font-semibold mb-6 text-center text-white">
+        Send Me a Message
+      </h3>
       <motion.form
         onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 20 }}
@@ -30,7 +36,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder="Your Name"
-          className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full border border-gray-700 bg-gray-800 text-gray-100 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <input
           type="email"
@@ -39,7 +45,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder="Your Email"
-          className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full border border-gray-700 bg-gray-800 text-gray-100 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <textarea
           name="message"
@@ -48,7 +54,7 @@ export default function ContactForm() {
           required
           rows="5"
           placeholder="Your Message"
-          className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full border border-gray-700 bg-gray-800 text-gray-100 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <motion.button
           whileHover={{ scale: 1.05 }}
