@@ -107,11 +107,11 @@ export default function ProjectDetails() {
           className="bg-gray-900/80 rounded-2xl p-8 flex flex-col items-center gap-6 shadow-lg border border-purple-800/50 hover:bg-gray-900/90 transition duration-300"
         >
           {project.image && (
-            <motion.div className="w-full flex items-center justify-center overflow-hidden rounded-xl border border-gray-700/50">
+            <motion.div className="h-[100px] w-full flex items-center justify-center overflow-hidden rounded-xl border border-gray-700/50">
               <motion.img
                 src={project.image}
                 alt={project.title}
-                className="max-h-80 w-auto object-contain rounded-lg shadow-xl transition-transform duration-500 hover:scale-105 hover:shadow-2xl"
+                className="  w-auto object-contain  shadow-xl transition-transform duration-500 hover:scale-105 hover:shadow-2xl"
               />
             </motion.div>
           )}
