@@ -7,10 +7,10 @@ export default function WorkExperience() {
   const experience = {
     company: "RemoteTech",
     role: "Front-End Developer",
-    period: "Jan 2024 - Present",
+    period: "Jan 2023 - Present",
     location: "Remote",
     description: `
-      Building modern, scalable user interfaces using React and Tailwind CSS. 
+      Building modern, scalable user interfaces using Next.js and Tailwind CSS. 
       Collaborating remotely with product designers and backend teams across multiple time zones.
       Focused on performance, accessibility, and delivering pixel-perfect UIs.
     `,

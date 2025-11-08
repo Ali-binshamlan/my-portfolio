@@ -108,7 +108,11 @@ export default function HeroSection() {
         >
           Front-End Developer specializing in React.js with a background in
           Computer Engineering. Strong experience in building modern,
-          responsive, and user-focused web applications...
+          responsive, and user-focused web applications. Skilled in transforming
+          UI/UX designs into high-performance, interactive interfaces using
+          HTML, CSS, JavaScript, and modern front-end tools like React Router,
+          Axios, Redux, and Tailwind CSS. Bootstrap 5, Passionate about clean
+          code, performance, and continuous learning
         </motion.p>
 
         <motion.div className="flex gap-5 flex-wrap" variants={itemVariants}>
