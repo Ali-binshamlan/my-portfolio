@@ -58,7 +58,7 @@ export default function MyProjects() {
         My Creative Portfolio
       </h2>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto relative z-10">
+      <div className="grid md:grid-cols-2 gap-8 max-w-5xl rounded-2xl mx-auto relative z-10">
         {" "}
         {/* ⬅️ تقليل gap وعرض max */}
         {projects.slice(0, 4).map((project, index) => (
@@ -80,14 +80,14 @@ export default function MyProjects() {
               boxShadow: "0 15px 30px -12px rgba(244, 114, 182, 0.4)",
               transition: { duration: 0.3 },
             }}
-            className="relative bg-gray-900/50 backdrop-blur-md rounded-2xl shadow-xl overflow-visible
+            className="relative bg-gray-900/50  backdrop-blur-md rounded-2xl shadow-xl overflow-visible
              flex flex-col border border-gray-700/50 cursor-pointer"
           >
             {/* لمعة زجاجية */}
-            <div className="absolute inset-0 rounded-2xl bg-white/5 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
+            <div className="absolute inset-0 rounded-2xl bg-white/5  opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
 
             {/* الصورة */}
-            <div className="w-full h-40 bg-gray-800/80 flex items-center justify-center p-4 border-b border-gray-700/50">
+            <div className="w-full h-40 bg-gray-800/80 flex items-center rounded-tr-2xl rounded-tl-2xl justify-center p-4 border-b border-gray-700/50">
               <img
                 src={project.image}
                 alt={project.title}

@@ -22,7 +22,7 @@ export default function MyProjects() {
   return (
     <section
       id="projects"
-      className="relative bg-gray-950 py-16 px-4 lg:px-12 text-gray-100 overflow-hidden" // ⬅️ تقليل الـ padding
+      className="relative bg-gray-950 py-16 px-4 lg:px-12 text-gray-100 overflow-hidden mt-10" // ⬅️ تقليل الـ padding
     >
       {/* خلفية متحركة - نقاط شهابية متوهجة (تقليل Opacity) */}
       <div className="absolute inset-0 -z-10 opacity-20 pointer-events-none"> {/* ⬅️ تقليل الشفافية */}

@@ -90,7 +90,7 @@ export default function ProjectDetails() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 py-16 px-4 md:px-8 lg:px-16 relative overflow-hidden">
+    <div className="min-h-screen bg-gray-950 text-gray-100 py-16 px-4 md:px-8 lg:px-16 relative overflow-hidden mt-10 ">
       {/* خلفية متوهجة */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full filter blur-[140px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/20 rounded-full filter blur-[140px] pointer-events-none translate-x-1/2 translate-y-1/2"></div>
@@ -107,7 +107,7 @@ export default function ProjectDetails() {
           className="bg-gray-900/80 rounded-2xl p-8 flex flex-col items-center gap-6 shadow-lg border border-purple-800/50 hover:bg-gray-900/90 transition duration-300"
         >
           {project.image && (
-            <motion.div className="h-[100px] w-full flex items-center justify-center overflow-hidden rounded-xl border border-gray-700/50">
+            <motion.div className="h-full w-full flex items-center justify-center overflow-hidden rounded-xl border border-gray-700/50">
               <motion.img
                 src={project.image}
                 alt={project.title}

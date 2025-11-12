@@ -82,7 +82,41 @@ export const projects = [
     ],
     detailsUrl: "/projects/ai-radiologist-admin",
   },
-  
+  {
+  id: "ai-vora",
+  title: "AI-Vora (AI Services Platform)",
+  demo: "https://ai-vora.vercel.app/",
+  image: "/ai-vora.png",
+  screenshots: [
+    "/screenshots/ai-vora.png",
+  ],
+  description:
+    "AI-Vora is an intelligent web platform offering AI-powered business services including document analysis, image recognition, and automated reporting. Built with React and Django, it provides a seamless interface for clients to interact with advanced AI tools easily and securely.",
+  keyFeatures: [
+    "AI-based image and document analysis with instant report generation.",
+    "User dashboard with history tracking and interactive visualizations.",
+    "Role-based authentication and secure data management.",
+    "Responsive, clean UI with smooth animations and dark/light modes.",
+  ],
+  challenges: [
+    "Integrating AI models with real-time user input and API responses.",
+    "Maintaining fast performance while handling large file uploads.",
+    "Ensuring data privacy and secure backend communication.",
+  ],
+  technologies: [
+    "React.js",
+    "Next.js",
+    "Tailwind CSS",
+    "Redux Toolkit",
+    "Axios",
+    "Framer Motion",
+    "React Hook Form",
+    "Yup",
+    "SweetAlert2",
+  ],
+  detailsUrl: "/projects/ai-vora",
+},
+
 // {
 //     id: "tabayyun",
 //     title: "Tabayyun",
