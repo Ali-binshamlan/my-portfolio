@@ -118,7 +118,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
         className="md:hidden fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full z-50"
       >
-        <div className="w-full bg-gradient-to-r from-blue-950 to-45% backdrop-blur-2xl rounded-b-xl border border-blue-400/40 shadow-xl shadow-blue-500/20 overflow-hidden">
+        <div className="w-full bg-gradient-to-r from-blue-950 to-45% backdrop-blur-2xl  border border-blue-400/40 shadow-xl shadow-blue-500/20 overflow-hidden">
           <div className="flex justify-around items-center py-1">
             {navLinks.map((link, index) => {
               const Icon = link.icon;
@@ -155,7 +155,7 @@ export default function Navbar() {
                     </motion.div>
 
                     <span
-                      className={`font-medium text-[9px] mt-1 ${
+                      className={`font-medium text-[14px] mt-1 ${
                         isActive(link.href)
                           ? "text-amber-300 font-bold"
                           : "text-blue-200 group-hover:text-white"
