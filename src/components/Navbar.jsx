@@ -118,7 +118,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
         className="md:hidden fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full z-50"
       >
-        <div className="w-full bg-gradient-to-r from-blue-950 to-45% backdrop-blur-2xl rounded-t-xl border border-blue-400/40 shadow-xl shadow-blue-500/20 overflow-hidden">
+        <div className="w-full bg-gradient-to-r from-blue-950 to-45% backdrop-blur-2xl rounded-b-xl border border-blue-400/40 shadow-xl shadow-blue-500/20 overflow-hidden">
           <div className="flex justify-around items-center py-1">
             {navLinks.map((link, index) => {
               const Icon = link.icon;
@@ -131,25 +131,21 @@ export default function Navbar() {
                 >
                   <Link
                     to={link.href}
-                    className={`flex flex-col items-center rounded-lg transition-all duration-300 group px-1.5 py-1 ${
+                    className={`flex flex-col items-center rounded-md transition-all duration-300 group px-1 py-0.5 ${
                       isActive(link.href)
                         ? "bg-blue-600/30 border border-blue-400/60"
                         : "bg-transparent border border-transparent hover:bg-blue-500/20"
                     }`}
                   >
                     <motion.div
-                      className={`p-2 rounded-full flex items-center justify-center ${
+                      className={`p-1.5 rounded-full flex items-center justify-center ${
                         isActive(link.href)
-                          ? "bg-gradient-to-r from-amber-400 to-orange-500 shadow-md shadow-amber-500/30"
-                          : "bg-blue-700/50 group-hover:bg-blue-600/70 shadow-md shadow-blue-500/20"
+                          ? "bg-gradient-to-r from-amber-400 to-orange-500 shadow-sm shadow-amber-500/20"
+                          : "bg-blue-700/40 group-hover:bg-blue-600/60 shadow-sm shadow-blue-500/10"
                       }`}
-                      animate={{
-                        scale: isActive(link.href) ? 1.05 : 1,
-                      }}
-                      transition={{ duration: 0.2 }}
                     >
                       <Icon
-                        size={16} // تصغير الأيقونة
+                        size={14} // أصغر قليلاً
                         className={
                           isActive(link.href)
                             ? "text-white"
@@ -159,7 +155,7 @@ export default function Navbar() {
                     </motion.div>
 
                     <span
-                      className={`font-medium text-[10px] mt-1.5 ${
+                      className={`font-medium text-[9px] mt-1 ${
                         isActive(link.href)
                           ? "text-amber-300 font-bold"
                           : "text-blue-200 group-hover:text-white"
@@ -167,15 +163,6 @@ export default function Navbar() {
                     >
                       {link.name}
                     </span>
-
-                    {isActive(link.href) && (
-                      <motion.div
-                        className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-amber-400 rounded-full shadow-md shadow-amber-400/40"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
                   </Link>
                 </motion.div>
               );
