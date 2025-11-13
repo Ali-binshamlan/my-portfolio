@@ -90,7 +90,7 @@ export default function ProjectDetails() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 py-16 px-4 md:px-8 lg:px-16 relative overflow-hidden mt-10 ">
+    <div className="min-h-screen bg-gray-950 text-gray-100 py-16 px-4 md:px-8 lg:px-16 relative overflow-hidden mt-0 md:mt-10 ">
       {/* خلفية متوهجة */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full filter blur-[140px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/20 rounded-full filter blur-[140px] pointer-events-none translate-x-1/2 translate-y-1/2"></div>
