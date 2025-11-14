@@ -91,7 +91,7 @@ export const projects = [
     "/screenshots/ai-vora.png",
   ],
   description:
-    "AI-Vora is an intelligent web platform offering AI-powered business services including document analysis, image recognition, and automated reporting. Built with React and Django, it provides a seamless interface for clients to interact with advanced AI tools easily and securely.",
+    "AI-Vora is an intelligent web platform offering AI-powered business services including document analysis, image recognition, and automated reporting. it provides a seamless interface for clients to interact with advanced AI tools easily and securely.",
   keyFeatures: [
     "AI-based image and document analysis with instant report generation.",
     "User dashboard with history tracking and interactive visualizations.",
