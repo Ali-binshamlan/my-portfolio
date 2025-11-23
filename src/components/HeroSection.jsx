@@ -63,7 +63,7 @@ export default function HeroSection() {
 
       {/* الصورة الرئيسية مع تدرج وظل */}
       <motion.div
-        className="flex-shrink-0 rounded-full p-2 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 shadow-2xl relative z-10"
+        className="flex-shrink-0 rounded-full p-2 bg-white shadow-2xl relative z-10"
         initial={{ opacity: 0, scale: 0.7, rotate: -15 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
         transition={{ duration: 1, type: "spring", stiffness: 100 }}
@@ -92,7 +92,7 @@ export default function HeroSection() {
           className="text-5xl md:text-7xl font-extrabold text-white mb-4 drop-shadow-lg"
           variants={itemVariants}
         >
-          Hi, I'm <span className="text-pink-400">Ali</span>
+          Hi, I'm <span className="text-white">Ali</span>
         </motion.h1>
 
         <motion.p

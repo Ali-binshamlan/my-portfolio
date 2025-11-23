@@ -53,7 +53,7 @@ export default function MyProjects() {
 
       <h2
         className="text-4xl font-extrabold text-center mb-12 relative z-10 
-                     bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text drop-shadow-lg"
+             text-white/90 drop-shadow-lg"
       >
         My Creative Portfolio
       </h2>

@@ -88,11 +88,8 @@ export default function WorkExperience() {
       {/* المحتوى الرئيسي */}
       <h2
         className="relative text-5xl font-extrabold text-center mb-12 
-                     bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text 
-                     z-10 drop-shadow-lg"
+             text-white z-10 drop-shadow-lg"
       >
-        {" "}
-        {/* <--- لون متدرج ومظلل */}
         My Journey
       </h2>
 
