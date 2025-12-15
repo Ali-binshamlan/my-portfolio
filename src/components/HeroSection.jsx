@@ -106,13 +106,13 @@ export default function HeroSection() {
           className="text-gray-300 text-lg leading-relaxed mb-8"
           variants={itemVariants}
         >
-          Front-End Developer specializing in React.js with a background in
-          Computer Engineering. Strong experience in building modern,
-          responsive, and user-focused web applications. Skilled in transforming
-          UI/UX designs into high-performance, interactive interfaces using
-          HTML, CSS, JavaScript, and modern front-end tools like React Router,
-          Axios, Redux, and Tailwind CSS. Bootstrap 5, Passionate about clean
-          code, performance, and continuous learning
+          Front-End Developer specialized in Next.js with a proven ability to
+          deliver real, production-level web applications. Skilled in building
+          fast, responsive, and scalable interfaces using React, Tailwind CSS,
+          and modern JavaScript tools. Worked on multiple impactful projects
+          including AI platforms and admin dashboards, showcasing strong
+          problem-solving skills and attention to clean, maintainable code.
+          Driven by performance, user experience, and continuous improvement
         </motion.p>
 
         <motion.div className="flex gap-5 flex-wrap" variants={itemVariants}>

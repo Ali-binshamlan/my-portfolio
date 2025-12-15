@@ -61,7 +61,7 @@ export default function MyProjects() {
       <div className="grid md:grid-cols-2 gap-8 max-w-5xl rounded-2xl mx-auto relative z-10">
         {" "}
         {/* ⬅️ تقليل gap وعرض max */}
-        {projects.slice(0, 4).map((project, index) => (
+        {projects.slice(0, 6).map((project, index) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}

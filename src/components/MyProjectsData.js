@@ -117,6 +117,54 @@ export const projects = [
   detailsUrl: "/projects/ai-vora",
 },
 
+  {
+    id: "yusr",
+title: "Yusr (Smart Rental Platform)",
+demo: "https://yusr-rent.vercel.app/",
+image: "/Logo-YSR.png",
+screenshots: [
+  "/screenshots/ysur_1.png",
+    "/screenshots/ysur_2.png",
+  "/screenshots/ysur_3.png",
+  "/screenshots/ysur_4.png",
+  "/screenshots/ysur_5.png",
+  "/screenshots/ysur_7.png",
+  "/screenshots/ysur_6.png",
+
+],
+description:
+  "Yusr is a smart web platform that connects owners with renters, allowing users to list items for rent and request rentals for specific periods. The platform streamlines the rental process with secure authentication, real-time notifications, and a user-friendly interface.",
+keyFeatures: [
+  "Item listing system with images, location, and daily pricing.",
+  "Rental request workflow with start/end date selection.",
+  "Owner approval system with controlled contact information visibility.",
+  "User profile dashboard to track sent and received rental requests.",
+  "Real-time notifications for request status updates.",
+  "Secure authentication and data handling using Supabase.",
+  "Responsive UI with smooth animations and modern design.",
+],
+challenges: [
+  "Designing a clear and fair rental request and approval flow.",
+  "Managing real-time updates for rental requests and notifications.",
+  "Ensuring data security while revealing contact details only after approval.",
+  "Optimizing performance with image uploads and dynamic data fetching.",
+],
+technologies: [
+  "React.js",
+  "Next.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "Supabase (Auth, Database, Storage)",
+  "Redux Toolkit",
+  "Axios",
+  "Framer Motion",
+  "React Hook Form",
+  "Yup",
+  "SweetAlert2",
+],
+detailsUrl: "/projects/yusr",
+},
+
 // {
 //     id: "tabayyun",
 //     title: "Tabayyun",
