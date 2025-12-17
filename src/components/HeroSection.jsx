@@ -126,7 +126,7 @@ export default function HeroSection() {
           </motion.a>
 
           <motion.a
-            href="https://drive.google.com/file/d/18_gnwyhdea0MMuhQLXtNo_1RsUdmvRO-/view?usp=sharing"
+            href="https://drive.google.com/file/d/1rN8yjFIdq-siAdwB2Nj7IjIb99Qk7Mlv/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.08, y: -2 }}
