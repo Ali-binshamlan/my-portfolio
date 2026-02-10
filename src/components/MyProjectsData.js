@@ -164,43 +164,44 @@ technologies: [
 ],
 detailsUrl: "/projects/yusr",
 },
+{
+    id: "elite-bank",
+    title: "Elite Bank ",
+    demo: "https://elite-bank-five.vercel.app/ar", // استبدله برابط الـ Vercel الفعلي الخاص بك
+    image: "/Logo_EB.png", // الصورة الرئيسية من مشروعك
+    screenshots: [
+      "/screenshots/elite-bank-1.png",
+      "/screenshots/elite-bank-2.png",
+      "/screenshots/elite-bank-3.png",
+    ],
+    description:
+      "A sophisticated digital banking landing page and platform featuring a high-end user experience. It includes interactive 3D bank cards, multi-language support (Arabic/English), dynamic account management sections, and a modern Bento Grid layout for banking services.",
+    keyFeatures: [
+      "Full Internationalization (i18n) support for Arabic (RTL) and English (LTR).",
+      "Interactive 3D Credit Cards with continuous shine effects and hover animations.",
+      "Modern Bento Grid layout for displaying different banking account types.",
+      "Dynamic finance details pages (Auto, Real Estate, Personal) with tailored themes.",
+      "Responsive navigation and localized routing using Next-Intl.",
+    ],
+    challenges: [
+      "Managing complex RTL/LTR layout shifts and font consistencies.",
+      "Implementing high-performance 3D CSS animations and continuous reflection effects.",
+      "Ensuring strict TypeScript type safety across dynamic finance configurations.",
+      "Optimizing heavy asset loading for a premium visual experience.",
+    ],
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "Styled Components",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Next-Intl (i18n)",
+      "Lucide Icons",
+      "Turbopack",
+    ],
+    detailsUrl: "/projects/elite-bank",
+  },
 
-// {
-//     id: "tabayyun",
-//     title: "Tabayyun",
-//     demo: "https://tabayyun.vercel.app/",
-//     image: "/TABAYYUN_Dark.png",
-//     screenshots: [
-//       "/screenshots/Tabayyun-1.png",
-//       "/screenshots/Tabayyun-2.png",
-//       "/screenshots/Tabayyun-3.png",
-//       "/screenshots/Tabayyun-4.png",
-//       "/screenshots/Tabayyun-5.png",
-//     ],
-//     description:
-//     "Tabayyun Business is a leading Saudi cybersecurity company committed to combating digital fraud across B2C, B2B, and B2G sectors",
-//       keyFeatures: [
-//   "Company and organization browsing with verified information.",
-//   "Trusted identity verification system with official badges.",
-//   "Interactive and modern UI built with React and Tailwind CSS.",
-//   "Filtering companies by category or business type.",
-//   "Detailed company pages with complete and transparent data.",
-// ],
-
-//     challenges: [
-//       "Handling API rate limits and dynamic content.",
-//       "Responsive carousel design.",
-//       "Efficient data loading and pagination.",
-//     ],
-//     technologies: [
-//       "Next.js",
-//       "React.js",
-//       "Tailwind CSS",
-//       "Axios",
-//       "REST APIs",
-//     ],
-//     detailsUrl: "/projects/tabayyun",
-//   },
   {
     id: "tarf-ecommerce",
     title: "TARF (E-Commerce Web App)",
