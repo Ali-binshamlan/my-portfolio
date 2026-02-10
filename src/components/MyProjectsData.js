@@ -1,87 +1,48 @@
 export const projects = [
   {
-    id: "ai-radiologist",
-    title: "AI-Radiologist",
-    demo: "https://ai-radiologist.vercel.app/",
-    ved:"https://drive.google.com/drive/folders/1riq5aVGt87GF9kAm3LzGFodv6VH8AhD_?usp=sharing",
-    image: "/ai-radiologist.png", // الصورة الرئيسية
-    screenshots: [
-      "/screenshots/ai-radiologist-1.png",
-      "/screenshots/ai-radiologist-2.png",
-      "/screenshots/ai-radiologist-3.png",
-      "/screenshots/ai-radiologist-4.png",
-      "/screenshots/ai-radiologist-5.png",
-      "/screenshots/ai-radiologist-6.png",
-      "/screenshots/ai-radiologist-7.png",
-      "/screenshots/ai-radiologist-8.png",
-      "/screenshots/ai-radiologist-9.png",
-      "/screenshots/ai-radiologist-10.png",
+  id: "drobi",
+  title: "Drobi (Ride Delivery App)",
+  demo: "https://www.drobi.sa/",
+  image: "/Drobi.png",
+  screenshots: [
+        "/screenshots/drobi-4.png",
 
-    ],
-    description:
-      "A responsive medical imaging platform that allows users to upload and analyze X-ray images using AI-powered diagnostics. It includes secure authentication, dynamic routing, user/admin dashboards, and full report management.",
-    keyFeatures: [
-      "Responsive web interface for X-ray analysis using AI.",
-      "Dynamic routing and protected dashboards (login/register/dashboard).",
-      "Upload, predict, and manage reports via RESTful APIs.",
-    ],
-    challenges: [
-      "Handling file uploads securely.",
-      "Maintaining auth state across components.",
-      "Mobile optimization and responsive UI.",
-    ],
-    technologies: [
-      "React.js",
-      "React Router",
-      "Axios",
-      "React Hook Form",
-      "Yup",
-      "Context API",
-      "Bootstrap 5",
-      "SweetAlert2",
-      "Framer Motion",
-      "JWT",
-    ],
-    detailsUrl: "/projects/ai-radiologist",
-  },
-  {
-    id: "ai-radiologist-admin",
-    title: "AI-Radiologist Admin Dashboard",
-    ved:"https://drive.google.com/drive/folders/18u6i-OpWDY6iGxmnaSj6O53BT40VfikH?usp=sharing",
-    image: "/ai-radiologist.png",
-    screenshots: [
-      "/screenshots/ai-radiologist-admin-1.png",
-      "/screenshots/ai-radiologist-admin-2.png",
-      "/screenshots/ai-radiologist-admin-3.png",
-      "/screenshots/ai-radiologist-admin-4.png",
-    ],
-    description:
-      "A standalone admin dashboard for managing users, reports, and AI diagnostic models. Features include CRUD operations, role and status management, secure admin-only routes, and responsive design.",
-    keyFeatures: [
-      "Standalone admin dashboard to manage users, reports, and AI models.",
-      "CRUD operations with role assignment and status toggling.",
-      "Protected routes for managing sensitive data.",
-    ],
-    challenges: [
-      "User permission handling.",
-      "Secure admin-only routing.",
-      "Responsive layout for tables and cards.",
-    ],
-    technologies: [
-      "React.js",
-      "React Router",
-      "Axios",
-      "React Hook Form",
-      "Yup",
-      "Context API",
-      "JWT",
-      "SweetAlert2",
-      "React Toastify",
-      "Bootstrap 5",
-      "Framer Motion",
-    ],
-    detailsUrl: "/projects/ai-radiologist-admin",
-  },
+     "/screenshots/drobi-3.png",
+   
+  ],
+
+  description:
+    "Drobi is a ride-hailing and trip delivery platform operating in Saudi Arabia. The platform allows users to request rides, manage bookings, and track trips through a modern web application built with Next.js and Node.js. It provides secure authentication, real-time trip management, and scalable backend services.",
+
+  keyFeatures: [
+    "Ride booking and trip management system.",
+    "Real-time trip status and tracking.",
+    "Secure authentication with protected routes.",
+    "Admin dashboard for managing users and trips.",
+    "SEO-friendly and high-performance web application using Next.js.",
+  ],
+
+  challenges: [
+    "Building scalable APIs for trip management.",
+    "Handling authentication and session management securely.",
+    "Optimizing performance with Server-Side Rendering (SSR).",
+    "Ensuring responsive design across devices.",
+  ],
+
+  technologies: [
+    "Next.js",
+    "Node.js",
+    "Express.js",
+    "React.js",
+    "JWT Authentication",
+    "RESTful API",
+    "Axios",
+    "Tailwind CSS / Bootstrap",
+  ],
+
+  detailsUrl: "/projects/drobi",
+},
+  
   {
   id: "ai-vora",
   title: "AI-Vora (AI Services Platform)",
@@ -164,43 +125,88 @@ technologies: [
 ],
 detailsUrl: "/projects/yusr",
 },
+{
+    id: "elite-bank",
+    title: "Elite Bank ",
+    demo: "https://elite-bank-five.vercel.app/ar", // استبدله برابط الـ Vercel الفعلي الخاص بك
+    image: "/Logo_EB.png", // الصورة الرئيسية من مشروعك
+    screenshots: [
+      "/screenshots/elite-bank-1.png",
+      "/screenshots/elite-bank-2.png",
+      "/screenshots/elite-bank-3.png",
+    ],
+    description:
+      "A sophisticated digital banking landing page and platform featuring a high-end user experience. It includes interactive 3D bank cards, multi-language support (Arabic/English), dynamic account management sections, and a modern Bento Grid layout for banking services.",
+    keyFeatures: [
+      "Full Internationalization (i18n) support for Arabic (RTL) and English (LTR).",
+      "Interactive 3D Credit Cards with continuous shine effects and hover animations.",
+      "Modern Bento Grid layout for displaying different banking account types.",
+      "Dynamic finance details pages (Auto, Real Estate, Personal) with tailored themes.",
+      "Responsive navigation and localized routing using Next-Intl.",
+    ],
+    challenges: [
+      "Managing complex RTL/LTR layout shifts and font consistencies.",
+      "Implementing high-performance 3D CSS animations and continuous reflection effects.",
+      "Ensuring strict TypeScript type safety across dynamic finance configurations.",
+      "Optimizing heavy asset loading for a premium visual experience.",
+    ],
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "Styled Components",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Next-Intl (i18n)",
+      "Lucide Icons",
+      "Turbopack",
+    ],
+    detailsUrl: "/projects/elite-bank",
+  },
+{
+    id: "ai-radiologist",
+    title: "AI-Radiologist",
+    demo: "https://ai-radiologist.vercel.app/",
+    ved:"https://drive.google.com/drive/folders/1riq5aVGt87GF9kAm3LzGFodv6VH8AhD_?usp=sharing",
+    image: "/ai-radiologist.png", // الصورة الرئيسية
+    screenshots: [
+      "/screenshots/ai-radiologist-1.png",
+      "/screenshots/ai-radiologist-2.png",
+      "/screenshots/ai-radiologist-3.png",
+      "/screenshots/ai-radiologist-4.png",
+      "/screenshots/ai-radiologist-5.png",
+      "/screenshots/ai-radiologist-6.png",
+      "/screenshots/ai-radiologist-7.png",
+      "/screenshots/ai-radiologist-8.png",
+      "/screenshots/ai-radiologist-9.png",
+      "/screenshots/ai-radiologist-10.png",
 
-// {
-//     id: "tabayyun",
-//     title: "Tabayyun",
-//     demo: "https://tabayyun.vercel.app/",
-//     image: "/TABAYYUN_Dark.png",
-//     screenshots: [
-//       "/screenshots/Tabayyun-1.png",
-//       "/screenshots/Tabayyun-2.png",
-//       "/screenshots/Tabayyun-3.png",
-//       "/screenshots/Tabayyun-4.png",
-//       "/screenshots/Tabayyun-5.png",
-//     ],
-//     description:
-//     "Tabayyun Business is a leading Saudi cybersecurity company committed to combating digital fraud across B2C, B2B, and B2G sectors",
-//       keyFeatures: [
-//   "Company and organization browsing with verified information.",
-//   "Trusted identity verification system with official badges.",
-//   "Interactive and modern UI built with React and Tailwind CSS.",
-//   "Filtering companies by category or business type.",
-//   "Detailed company pages with complete and transparent data.",
-// ],
-
-//     challenges: [
-//       "Handling API rate limits and dynamic content.",
-//       "Responsive carousel design.",
-//       "Efficient data loading and pagination.",
-//     ],
-//     technologies: [
-//       "Next.js",
-//       "React.js",
-//       "Tailwind CSS",
-//       "Axios",
-//       "REST APIs",
-//     ],
-//     detailsUrl: "/projects/tabayyun",
-//   },
+    ],
+    description:
+      "A responsive medical imaging platform that allows users to upload and analyze X-ray images using AI-powered diagnostics. It includes secure authentication, dynamic routing, user/admin dashboards, and full report management.",
+    keyFeatures: [
+      "Responsive web interface for X-ray analysis using AI.",
+      "Dynamic routing and protected dashboards (login/register/dashboard).",
+      "Upload, predict, and manage reports via RESTful APIs.",
+    ],
+    challenges: [
+      "Handling file uploads securely.",
+      "Maintaining auth state across components.",
+      "Mobile optimization and responsive UI.",
+    ],
+    technologies: [
+      "React.js",
+      "React Router",
+      "Axios",
+      "React Hook Form",
+      "Yup",
+      "Context API",
+      "Bootstrap 5",
+      "SweetAlert2",
+      "Framer Motion",
+      "JWT",
+    ],
+    detailsUrl: "/projects/ai-radiologist",
+  },
   {
     id: "tarf-ecommerce",
     title: "TARF (E-Commerce Web App)",
@@ -238,6 +244,45 @@ detailsUrl: "/projects/yusr",
     ],
     detailsUrl: "/projects/tarf-ecommerce",
   },
+  {
+    id: "ai-radiologist-admin",
+    title: "AI-Radiologist Admin Dashboard",
+    ved:"https://drive.google.com/drive/folders/18u6i-OpWDY6iGxmnaSj6O53BT40VfikH?usp=sharing",
+    image: "/ai-radiologist.png",
+    screenshots: [
+      "/screenshots/ai-radiologist-admin-1.png",
+      "/screenshots/ai-radiologist-admin-2.png",
+      "/screenshots/ai-radiologist-admin-3.png",
+      "/screenshots/ai-radiologist-admin-4.png",
+    ],
+    description:
+      "A standalone admin dashboard for managing users, reports, and AI diagnostic models. Features include CRUD operations, role and status management, secure admin-only routes, and responsive design.",
+    keyFeatures: [
+      "Standalone admin dashboard to manage users, reports, and AI models.",
+      "CRUD operations with role assignment and status toggling.",
+      "Protected routes for managing sensitive data.",
+    ],
+    challenges: [
+      "User permission handling.",
+      "Secure admin-only routing.",
+      "Responsive layout for tables and cards.",
+    ],
+    technologies: [
+      "React.js",
+      "React Router",
+      "Axios",
+      "React Hook Form",
+      "Yup",
+      "Context API",
+      "JWT",
+      "SweetAlert2",
+      "React Toastify",
+      "Bootstrap 5",
+      "Framer Motion",
+    ],
+    detailsUrl: "/projects/ai-radiologist-admin",
+  },
+  
   {
     id: "movie-web-app",
     title: "Movie Web App",
