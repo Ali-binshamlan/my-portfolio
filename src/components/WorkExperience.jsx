@@ -44,7 +44,7 @@ const timeline = [
 
 export default function WorkExperience() {
   return (
-    <section className="relative pt-8 pb-24 px-6 md:px-10 lg:px-20 text-gray-100 overflow-hidden">
+    <section id="experience" className="relative scroll-mt-24 pt-8 pb-24 px-6 md:px-10 lg:px-20 text-gray-100 overflow-hidden">
       <Heading3D className="text-5xl mb-16">My Journey</Heading3D>
 
       <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_380px] gap-10 items-center">

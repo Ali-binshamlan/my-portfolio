@@ -1,178 +1,213 @@
 // src/components/Navbar.jsx
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { FaHome, FaBriefcase, FaProjectDiagram, FaCode, FaEnvelope, FaDownload } from "react-icons/fa";
 
-import { useState, useEffect } from "react";
-import { FaHome, FaProjectDiagram, FaEnvelope } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+const CV_URL = "/Ali-Bin-Shamlan_CV.pdf";
+
+const links = [
+  { id: "home", label: "Home", icon: FaHome },
+  { id: "experience", label: "Experience", icon: FaBriefcase },
+  { id: "projects", label: "Projects", icon: FaProjectDiagram },
+  { id: "skills", label: "Skills", icon: FaCode },
+  { id: "contact", label: "Contact", icon: FaEnvelope },
+];
+
+// شعار على شكل مكعب ثلاثي الأبعاد يدور
+function LogoCube() {
+  const face = "absolute inset-0 grid place-items-center rounded-md border border-white/20 font-black text-[11px] text-white";
+  const s = 28;
+  return (
+    <div className="relative" style={{ width: s, height: s, perspective: 300 }} aria-hidden>
+      <motion.div
+        className="absolute inset-0"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateY: 360, rotateX: [0, 20, 0, -20, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      >
+        <div className={`${face} bg-purple-600/90`} style={{ transform: `translateZ(${s / 2}px)` }}>AB</div>
+        <div className={`${face} bg-pink-600/90`} style={{ transform: `rotateY(180deg) translateZ(${s / 2}px)` }}>{"</>"}</div>
+        <div className={`${face} bg-indigo-600/90`} style={{ transform: `rotateY(90deg) translateZ(${s / 2}px)` }}>{"{}"}</div>
+        <div className={`${face} bg-fuchsia-600/90`} style={{ transform: `rotateY(-90deg) translateZ(${s / 2}px)` }}>JS</div>
+        <div className={`${face} bg-violet-700/90`} style={{ transform: `rotateX(90deg) translateZ(${s / 2}px)` }} />
+        <div className={`${face} bg-violet-900/90`} style={{ transform: `rotateX(-90deg) translateZ(${s / 2}px)` }} />
+      </motion.div>
+    </div>
+  );
+}
 
 export default function Navbar() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const onHome = location.pathname === "/";
+  const [active, setActive] = useState("home");
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
 
-  const isActive = (path) => location.pathname === path;
+  // إخفاء الشريط عند النزول وإظهاره عند الصعود
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setScrolled(y > 30);
+    setHidden(y > prev && y > 240);
+  });
 
-  const navLinks = [
-    { name: "Home", href: "/", icon: FaHome },
-    { name: "Projects", href: "/projects", icon: FaProjectDiagram },
-    { name: "Contact", href: "/Contact", icon: FaEnvelope },
-  ];
+  // تتبّع القسم الظاهر حالياً
+  useEffect(() => {
+    if (!onHome) {
+      setActive(location.pathname.startsWith("/projects") ? "projects" : location.pathname.toLowerCase() === "/contact" ? "contact" : "");
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    links.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
+  }, [onHome, location.pathname]);
+
+  const go = (id) => {
+    if (!onHome) {
+      navigate("/", { state: { scrollTo: id } });
+      return;
+    }
+    if (id === "home") window.scrollTo({ top: 0, behavior: "smooth" });
+    else document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
-      {/* Desktop Navigation */}
-      <motion.nav
+      {/* ===== سطح المكتب ===== */}
+      <motion.header
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="hidden md:block fixed top-0 left-0 w-full z-50 backdrop-blur-xl py-3 shadow-2xl"
+        animate={{ y: hidden ? -110 : 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 30 }}
+        className="hidden md:block fixed top-3 inset-x-0 z-50 px-6"
       >
-        <div className="flex justify-center">
-          <motion.div
-            style={{ transformPerspective: 800 }}
-            whileHover={{ rotateX: 12, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="flex items-center justify-center px-8 border border-white/15 rounded-2xl bg-gray-900/40 backdrop-blur-md py-3 w-[500px] shadow-[0_10px_0_rgba(30,27,75,0.8),0_25px_50px_-10px_rgba(99,102,241,0.45)]">
-            <motion.ul
-              className="flex items-center space-x-2 text-white relative"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              {navLinks.map((link, index) => {
-                const Icon = link.icon;
-                return (
-                  <motion.li
-                    key={link.name}
-                    className="relative"
-                    whileHover={{ y: -2 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <Link
-                      to={link.href}
-                      className={`relative px-5 py-2 overflow-hidden group flex items-center gap-2 rounded-lg transition-all duration-300 ${
-                        isActive(link.href)
-                          ? "text-white"
-                          : "text-gray-200 hover:text-white"
-                      }`}
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                    >
-                      {/* Animated Background */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-lg"
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{
-                          scale:
-                            hoveredIndex === index || isActive(link.href)
-                              ? 1
-                              : 0,
-                          opacity:
-                            hoveredIndex === index || isActive(link.href)
-                              ? 1
-                              : 0,
-                        }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 25,
-                        }}
-                      />
+        <nav
+          aria-label="Main"
+          style={{ transformPerspective: 900 }}
+          className={`mx-auto max-w-5xl flex items-center justify-between gap-6 rounded-2xl border border-white/10 backdrop-blur-xl transition-all duration-500 ${
+            scrolled
+              ? "bg-gray-950/70 px-4 py-2 shadow-[0_8px_0_rgba(30,27,75,0.7),0_20px_50px_-10px_rgba(124,58,237,0.5)]"
+              : "bg-gray-900/30 px-5 py-3 shadow-[0_10px_40px_-15px_rgba(124,58,237,0.5)]"
+          }`}
+        >
+          <button onClick={() => go("home")} className="flex items-center gap-3 group" aria-label="Go to top">
+            <LogoCube />
+            <span className="font-bold text-white tracking-tight">
+              Ali<span className="text-purple-400">.</span>
+              <span className="hidden lg:inline text-gray-400 font-medium"> Bin Shamlan</span>
+            </span>
+          </button>
 
-                      {/* Icon */}
-                      <motion.div
-                        animate={{
-                          scale:
-                            hoveredIndex === index || isActive(link.href)
-                              ? 1.2
-                              : 1,
-                          rotate: hoveredIndex === index ? 5 : 0,
-                        }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Icon size={16} className="relative z-10" />
-                      </motion.div>
-
-                      {/* Text */}
-                      <span className="relative z-10 font-medium text-sm transition-all duration-300">
-                        {link.name}
-                      </span>
-
-                      {/* Active Indicator */}
-                      {isActive(link.href) && (
-                        <motion.div
-                          className="absolute -bottom-1 left-1/2 w-1 h-1 bg-amber-300 rounded-full"
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                      )}
-                    </Link>
-                  </motion.li>
-                );
-              })}
-            </motion.ul>
-          </motion.div>
-        </div>
-      </motion.nav>
-
-      {/* Mobile Bottom Navigation - Smaller Version */}
-      <motion.nav
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-        className="md:hidden fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full z-50"
-      >
-        <div className="w-full bg-gradient-to-r from-blue-950 to-45% backdrop-blur-2xl   shadow-xl shadow-blue-500/20 overflow-hidden">
-          <div className="flex justify-around items-center py-1">
-            {navLinks.map((link, index) => {
-              const Icon = link.icon;
-              return (
-                <motion.div
-                  key={link.name}
-                  className="relative"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+          <ul className="flex items-center gap-1 rounded-xl bg-white/[0.03] border border-white/5 p-1">
+            {links.map(({ id, label }) => (
+              <li key={id}>
+                <button
+                  onClick={() => go(id)}
+                  aria-current={active === id ? "true" : undefined}
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-purple-400 ${
+                    active === id ? "text-white" : "text-gray-400 hover:text-white"
+                  }`}
                 >
-                  <Link
-                    to={link.href}
-                    className={`flex flex-col items-center rounded-md transition-all duration-300 group px-1 py-0.5 ${
-                      isActive(link.href)
-                        ? "bg-blue-600/30 border border-blue-400/60"
-                        : "bg-transparent border border-transparent hover:bg-blue-500/20"
+                  {active === id && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      className="absolute inset-0 rounded-lg bg-gradient-to-b from-purple-500 to-purple-700 shadow-[0_4px_0_#3b0764,0_8px_20px_rgba(168,85,247,0.45)]"
+                    />
+                  )}
+                  <span className="relative z-10">{label}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          <motion.a
+            href={CV_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -2 }}
+            whileTap={{ y: 3 }}
+            style={{ boxShadow: "0 4px 0 #831843, 0 10px 25px rgba(236,72,153,.35)" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-b from-pink-500 to-pink-700 text-white text-sm font-semibold"
+          >
+            <FaDownload size={12} /> CV
+          </motion.a>
+        </nav>
+      </motion.header>
+
+      {/* ===== الجوال: شريط علوي صغير ===== */}
+      <AnimatePresence>
+        {!hidden && (
+          <motion.header
+            initial={{ y: -80 }}
+            animate={{ y: 0 }}
+            exit={{ y: -80 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="md:hidden fixed top-2 inset-x-3 z-50 flex items-center justify-between rounded-2xl border border-white/10 bg-gray-950/70 backdrop-blur-xl px-3 py-2 shadow-[0_10px_30px_-10px_rgba(124,58,237,0.6)]"
+          >
+            <button onClick={() => go("home")} className="flex items-center gap-2" aria-label="Go to top">
+              <LogoCube />
+              <span className="font-bold text-white">
+                Ali<span className="text-purple-400">.</span>
+              </span>
+            </button>
+            <a
+              href={CV_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ boxShadow: "0 3px 0 #831843" }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-b from-pink-500 to-pink-700 text-white text-xs font-semibold"
+            >
+              <FaDownload size={10} /> CV
+            </a>
+          </motion.header>
+        )}
+      </AnimatePresence>
+
+      {/* ===== الجوال: شريط سفلي (Dock) ===== */}
+      <motion.nav
+        aria-label="Sections"
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 28, delay: 0.2 }}
+        className="md:hidden fixed bottom-3 inset-x-3 z-50 rounded-2xl border border-white/10 bg-gray-950/80 backdrop-blur-xl shadow-[0_-6px_30px_-10px_rgba(124,58,237,0.6)]"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      >
+        <ul className="grid grid-cols-5">
+          {links.map(({ id, label, icon: Icon }) => {
+            const isActive = active === id;
+            return (
+              <li key={id}>
+                <button
+                  onClick={() => go(id)}
+                  aria-label={label}
+                  aria-current={isActive ? "true" : undefined}
+                  className="relative w-full flex flex-col items-center gap-0.5 py-2"
+                >
+                  <motion.span
+                    animate={{ y: isActive ? -10 : 0, scale: isActive ? 1.1 : 1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                    className={`grid place-items-center w-9 h-9 rounded-xl transition-colors ${
+                      isActive
+                        ? "bg-gradient-to-b from-purple-500 to-purple-700 text-white shadow-[0_4px_0_#3b0764,0_10px_20px_rgba(168,85,247,0.55)]"
+                        : "text-gray-400"
                     }`}
                   >
-                    <motion.div
-                      className={`p-1.5 rounded-full flex items-center justify-center ${
-                        isActive(link.href)
-                          ? "bg-gradient-to-r from-amber-400 to-orange-500 shadow-sm shadow-amber-500/20"
-                          : "bg-blue-700/40 group-hover:bg-blue-600/60 shadow-sm shadow-blue-500/10"
-                      }`}
-                    >
-                      <Icon
-                        size={14} // أصغر قليلاً
-                        className={
-                          isActive(link.href)
-                            ? "text-white"
-                            : "text-blue-200 group-hover:text-white"
-                        }
-                      />
-                    </motion.div>
-
-                    <span
-                      className={`font-medium text-[14px] mt-1 ${
-                        isActive(link.href)
-                          ? "text-amber-300 font-bold"
-                          : "text-blue-200 group-hover:text-white"
-                      }`}
-                    >
-                      {link.name}
-                    </span>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
+                    <Icon size={15} />
+                  </motion.span>
+                  <span className={`text-[10px] font-medium -mt-1 ${isActive ? "text-purple-300" : "text-gray-500"}`}>{label}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </motion.nav>
     </>
   );

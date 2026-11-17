@@ -25,7 +25,7 @@ const iconMap = {
   Git: <FaGitAlt className="text-orange-500" />,
   GitHub: <FaGithub className="text-white" />,
   "VS Code": <VscVscode className="text-sky-500" />,
-  "Responsive Design": <MdDesignServices className="text-pink-400" />,
+  "Responsive Web Design": <MdDesignServices className="text-pink-400" />,
   "Performance Optimization": <MdSpeed className="text-green-400" />,
 };
 
@@ -33,7 +33,12 @@ const skillCategories = [
   { title: "Languages", skills: ["JavaScript", "TypeScript", "HTML5", "CSS3"] },
   { title: "Frameworks & Libraries", skills: ["Next.js", "React.js", "Tailwind CSS", "Bootstrap 5", "Redux"] },
   { title: "APIs & Tools", skills: ["REST APIs", "Axios", "Git", "GitHub", "VS Code"] },
-  { title: "Core Competencies", skills: ["Responsive Design", "Performance Optimization"], extra: ["CI/CD", "Agile", "Scrum", "Clean Code"] },
+  { title: "Other Tools", skills: [], extra: ["CI/CD", "Agile", "Scrum"] },
+  {
+    title: "Core Competencies",
+    skills: ["Responsive Web Design", "Performance Optimization"],
+    extra: ["REST API Integration", "Clean Code"],
+  },
 ];
 
 const softSkills = ["Communication", "Problem Solving", "Teamwork", "Time Management", "Flexibility"];
@@ -42,7 +47,7 @@ const globeSkills = Object.entries(iconMap).map(([name, icon]) => ({ name, icon 
 
 export default function MySkills() {
   return (
-    <section id="skills" className="relative text-gray-100 py-24 px-6 lg:px-20">
+    <section id="skills" className="relative scroll-mt-16 text-gray-100 py-24 px-6 lg:px-20">
       <Heading3D className="text-5xl mb-6">My Skills</Heading3D>
       <p className="text-center text-gray-400 mb-6">Drag your mouse over the globe — hover a skill to pause it</p>
 
@@ -51,7 +56,7 @@ export default function MySkills() {
         <SkillsGlobe skills={globeSkills} />
       </InView>
 
-      <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {skillCategories.map((category, index) => (
           <Reveal3D key={category.title} delay={index * 0.1} from={index % 2 ? "right" : "left"}>
             <TiltCard className="bg-gray-900/40 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_20px_60px_-20px_rgba(139,92,246,0.45)] border border-white/10 hover:border-purple-500 transition-colors duration-300">
@@ -80,7 +85,8 @@ export default function MySkills() {
         ))}
       </div>
 
-      <Reveal3D className="max-w-6xl mx-auto mt-10">
+      <Reveal3D className="max-w-6xl mx-auto mt-12">
+        <h3 className="text-center text-2xl font-bold text-purple-400 mb-5">Soft Skills</h3>
         <div className="flex flex-wrap justify-center gap-3">
           {softSkills.map((s) => (
             <span key={s} className="px-5 py-2 rounded-full bg-gradient-to-b from-gray-800 to-gray-900 border border-white/10 text-gray-200 shadow-[0_6px_0_#1f1638,0_12px_25px_rgba(124,58,237,0.35)] hover:translate-y-1 hover:shadow-[0_2px_0_#1f1638,0_6px_15px_rgba(124,58,237,0.35)] transition-all">

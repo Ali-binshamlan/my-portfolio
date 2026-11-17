@@ -31,10 +31,10 @@ export default function HeroSection() {
   const textRotX = useTransform(scrollY, [0, 600], [0, 25]);
 
   return (
-    <section className="relative flex flex-col md:flex-row items-center justify-center p-6 mx-auto gap-10 text-white min-h-screen overflow-hidden md:pt-24 pb-24 max-w-7xl">
+    <section id="home" className="relative flex flex-col md:flex-row items-center justify-center p-6 mx-auto gap-10 text-white min-h-screen overflow-hidden pt-16 md:pt-24 pb-24 max-w-7xl">
       {/* مشهد ثلاثي الأبعاد تفاعلي */}
       <motion.div
-        className="relative z-10 w-full md:w-1/2 h-[360px] md:h-[600px] order-first md:order-last"
+        className="relative z-10 w-full md:w-1/2 h-[300px] md:h-[600px] order-first md:order-last"
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
@@ -62,15 +62,18 @@ export default function HeroSection() {
           <span className="px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-white/5 border border-white/10 text-purple-200 backdrop-blur">
             Available for work
           </span>
+          <span className="hidden sm:inline px-3 py-1 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 backdrop-blur">
+            📍 Riyadh, Saudi Arabia
+          </span>
         </motion.div>
 
         <motion.h1
-          className="text-5xl md:text-7xl font-extrabold text-white mb-4 drop-shadow-lg"
+          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-3 leading-tight drop-shadow-lg"
           variants={itemVariants}
         >
-          Hi, I'm{" "}
-          <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
-            Ali
+          Hi, I&apos;m
+          <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent pb-2">
+            Ali Bin Shamlan
           </span>
         </motion.h1>
 
@@ -82,22 +85,30 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.p
-          className="text-gray-300 text-lg leading-relaxed mb-8"
+          className="text-gray-300 text-base md:text-lg leading-relaxed mb-8"
           variants={itemVariants}
         >
           Front-End Developer with 3+ years of experience building
           production-level web applications with Next.js, React, and
           TypeScript. Delivered AI platforms, admin dashboards, and
-          consumer-facing websites — with a strong focus on performance, user
+          consumer-facing websites for clients remotely and in a full-time role
+          at an environmental consulting firm. Skilled in fast, responsive, and
+          scalable interfaces using Tailwind CSS, REST API integration, and
+          modern JavaScript tools, with a strong focus on performance, user
           experience, and clean, maintainable code.
         </motion.p>
 
         <motion.div className="flex gap-5 flex-wrap" variants={itemVariants}>
           <motion.a
             href="#projects"
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 bg-purple-600 text-white px-7 py-3 rounded-full font-bold shadow-xl hover:bg-purple-700 transition transform"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            whileHover={{ y: -3 }}
+            whileTap={{ y: 4, boxShadow: "0 1px 0 #3b0764" }}
+            style={{ boxShadow: "0 6px 0 #3b0764, 0 18px 40px rgba(168,85,247,.45)" }}
+            className="flex items-center gap-3 bg-gradient-to-b from-purple-500 to-purple-700 text-white px-7 py-3 rounded-full font-bold"
           >
             <FaFolderOpen size={20} /> View My Projects
           </motion.a>
@@ -106,9 +117,10 @@ export default function HeroSection() {
             href="/Ali-Bin-Shamlan_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 border-2 border-pink-500 text-pink-400 px-7 py-3 rounded-full font-bold shadow-xl hover:bg-pink-500 hover:text-white transition transform"
+            whileHover={{ y: -3 }}
+            whileTap={{ y: 4 }}
+            style={{ boxShadow: "0 6px 0 #500724, 0 18px 40px rgba(236,72,153,.25)" }}
+            className="flex items-center gap-3 border-2 border-pink-500 bg-gray-950/60 backdrop-blur text-pink-300 px-7 py-3 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-colors"
           >
             <FaFileAlt size={20} /> View Resume
           </motion.a>

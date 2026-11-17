@@ -176,8 +176,13 @@ export default function ProjectsOrbit({ projects, title = "Featured Projects", i
                 className="rounded-2xl p-4 md:p-7 bg-gray-900/50 backdrop-blur-xl border border-white/10 shadow-[0_30px_80px_-30px_rgba(139,92,246,0.8)]"
               >
                 <div className="flex items-center justify-between font-mono text-xs md:text-sm mb-3">
-                  <span className="text-purple-300">
-                    {String(active + 1).padStart(2, "0")} <span className="text-gray-600">/ {String(n).padStart(2, "0")}</span>
+                  <span className="flex items-center gap-3">
+                    <span className="text-purple-300">
+                      {String(active + 1).padStart(2, "0")} <span className="text-gray-600">/ {String(n).padStart(2, "0")}</span>
+                    </span>
+                    {p.category && (
+                      <span className="px-2 py-0.5 rounded-md bg-pink-500/10 border border-pink-400/20 text-pink-300 text-[11px]">{p.category}</span>
+                    )}
                   </span>
                   {p.image && <img src={p.image} alt="" className="h-8 md:h-10 w-auto object-contain" />}
                 </div>

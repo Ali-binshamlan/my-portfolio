@@ -3,3 +3,10 @@
 body{
     background-color: #05050a;
 }
+/* مساحة للشريط السفلي في الجوال */
+@media (max-width: 767px) {
+  body { padding-bottom: 84px; }
+}
+
+/* إطار تركيز واضح لمستخدمي الكيبورد */
+:focus-visible { outline: 2px solid #a78bfa; outline-offset: 3px; }

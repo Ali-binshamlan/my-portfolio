@@ -185,7 +185,7 @@ function Rig({ children }) {
     g.rotation.y += (s.pointer.x * 0.35 - 0.35 + scroll * 0.9 - g.rotation.y) * 0.06;
     g.rotation.x += (-s.pointer.y * 0.12 + scroll * 0.25 - g.rotation.x) * 0.06;
     g.position.y += (scroll * 1.6 - 0.35 - g.position.y) * 0.08;
-    const sc = (s.size.width < 600 ? 0.78 : 1) * (1 - scroll * 0.25);
+    const sc = (s.size.width < 600 ? 0.68 : 1) * (1 - scroll * 0.25);
     g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, sc, 0.08));
   });
   return <group ref={ref}>{children}</group>;

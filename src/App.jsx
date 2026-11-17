@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import WorkExperience from "./components/WorkExperience";
@@ -16,7 +17,7 @@ const SpaceBackground = lazy(() => import("./components/three/SpaceBackground"))
 
 export default function App() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <Suspense fallback={null}>
         <SpaceBackground />
       </Suspense>
@@ -51,6 +52,6 @@ export default function App() {
         <Route path="/projects/:projectId" element={<ProjectDetails />} />
         <Route path="/Contact" element={<GetInTouch />} />
       </Routes>
-    </>
+    </MotionConfig>
   );
 }

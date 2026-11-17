@@ -19,7 +19,7 @@ const links = [
 
 export default function GetInTouch() {
   return (
-    <section id="contact" className="relative py-24 px-6 lg:px-20 text-gray-100 md:pt-28">
+    <section id="contact" className="relative scroll-mt-10 py-24 px-6 lg:px-20 text-gray-100 md:pt-28">
       <Heading3D className="text-5xl mb-4">Get In Touch</Heading3D>
       <p className="flex items-center justify-center gap-2 text-gray-400 mb-6">
         <FaMapMarkerAlt /> Riyadh, Saudi Arabia

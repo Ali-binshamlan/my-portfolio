@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function ContactForm() {
+  const [sent, setSent] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,8 +14,11 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Thanks, ${formData.name}! Your message has been sent.`);
-    setFormData({ name: "", email: "", message: "" });
+    // يفتح برنامج البريد برسالة جاهزة موجّهة إلى علي
+    const subject = encodeURIComponent(`Portfolio message from ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}\n\n— ${formData.name} (${formData.email})`);
+    window.location.href = `mailto:alishamlan47@gmail.com?subject=${subject}&body=${body}`;
+    setSent(true);
   };
 
   return (
@@ -36,6 +40,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder="Your Name"
+          aria-label="Your Name"
           className="w-full border border-gray-700 bg-gray-900/70 text-gray-100 rounded-xl px-4 shadow-[inset_0_3px_8px_rgba(0,0,0,0.6)] py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <input
@@ -45,6 +50,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           placeholder="Your Email"
+          aria-label="Your Email"
           className="w-full border border-gray-700 bg-gray-900/70 text-gray-100 rounded-xl px-4 shadow-[inset_0_3px_8px_rgba(0,0,0,0.6)] py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <textarea
@@ -54,6 +60,7 @@ export default function ContactForm() {
           required
           rows="5"
           placeholder="Your Message"
+          aria-label="Your Message"
           className="w-full border border-gray-700 bg-gray-900/70 text-gray-100 rounded-xl px-4 shadow-[inset_0_3px_8px_rgba(0,0,0,0.6)] py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <motion.button
@@ -63,8 +70,14 @@ export default function ContactForm() {
           type="submit"
           className="w-full bg-gradient-to-b from-purple-500 to-purple-700 text-white py-3 rounded-xl font-semibold"
         >
-          Send Message
+          {sent ? "Opening your email app…" : "Send Message"}
         </motion.button>
+        {sent && (
+          <p className="text-center text-sm text-gray-400" role="status">
+            If nothing opened, email me directly at{" "}
+            <a className="text-purple-300 underline" href="mailto:alishamlan47@gmail.com">alishamlan47@gmail.com</a>
+          </p>
+        )}
       </motion.form>
     </section>
   );
