@@ -85,11 +85,383 @@ function drawCode(ctx, visible, blink) {
   }
 }
 
-function Laptop() {
+// ---------- أدوات بناء الشخصية ----------
+const UP = new THREE.Vector3(0, 1, 0);
+
+// طرف (ذراع/ساق) كبسولة بين نقطتين
+function Limb({ from, to, r = 0.07, children }) {
+  const { pos, quat, len } = useMemo(() => {
+    const a = new THREE.Vector3(...from);
+    const b = new THREE.Vector3(...to);
+    const dir = b.clone().sub(a);
+    return {
+      pos: a.clone().add(b).multiplyScalar(0.5),
+      quat: new THREE.Quaternion().setFromUnitVectors(UP, dir.clone().normalize()),
+      len: dir.length(),
+    };
+  }, [from, to]);
+  return (
+    <mesh position={pos} quaternion={quat}>
+      <capsuleGeometry args={[r, Math.max(len - r * 2, 0.01), 6, 12]} />
+      {children}
+    </mesh>
+  );
+}
+
+const SKIN = "#9a6240";
+const SKIN_DARK = "#8a5838";
+const HAIR = "#17110e";
+const NAVY = "#18225e";
+const NAVY_LIGHT = "#223079";
+const BLACK = "#0d0d12";
+
+const toon = (color) => <meshToonMaterial color={color} />;
+
+// شعر مجعّد: كرات صغيرة كثيفة أعلى الرأس وقصير على الجوانب
+function CurlyHair() {
+  const curls = useMemo(() => {
+    const out = [];
+    let seed = 7;
+    const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    for (let i = 0; i < 110; i++) {
+      const theta = rnd() * Math.PI * 2;
+      const y = 0.05 + rnd() * 0.95; // نصف الكرة العلوي
+      const ring = Math.sqrt(1 - y * y);
+      const x = Math.cos(theta) * ring;
+      const z = Math.sin(theta) * ring;
+      if (z > 0.3 && y < 0.62) continue; // خط الشعر في الجبهة
+      if (Math.abs(x) > 0.75 && y < 0.35) continue; // الجوانب قصيرة
+      const lift = y > 0.45 ? 0.08 + rnd() * 0.09 : 0.0; // حجم أكبر في الأعلى
+      const R = 0.27 + lift;
+      out.push({ p: [x * R * 0.95, y * R * 1.05 + 0.04, z * R * 0.95 - 0.015], s: 0.055 + rnd() * 0.05 });
+    }
+    return out;
+  }, []);
+  return (
+    <group>
+      {curls.map((c, i) => (
+        <mesh key={i} position={c.p} scale={c.s}>
+          <icosahedronGeometry args={[1, 1]} />
+          {toon(HAIR)}
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+function Head({ headRef, eyesRef }) {
+  return (
+    <group ref={headRef} position={[0, 2.24, -0.18]} scale={1.32}>
+      {/* الوجه */}
+      <mesh scale={[0.9, 1.06, 0.92]}>
+        <sphereGeometry args={[0.27, 32, 32]} />
+        {toon(SKIN)}
+      </mesh>
+      {/* الأذنان */}
+      {[-1, 1].map((sx) => (
+        <mesh key={sx} position={[sx * 0.245, 0.0, -0.02]} scale={[0.5, 1, 0.7]}>
+          <sphereGeometry args={[0.07, 16, 16]} />
+          {toon(SKIN_DARK)}
+        </mesh>
+      ))}
+      <CurlyHair />
+      {/* العينان */}
+      <group ref={eyesRef} position={[0, 0.035, 0.225]}>
+        {[-1, 1].map((sx) => (
+          <group key={sx} position={[sx * 0.085, 0, 0]}>
+            <mesh scale={[1, 1.15, 0.5]}>
+              <sphereGeometry args={[0.032, 16, 16]} />
+              <meshBasicMaterial color="#1a0f0a" />
+            </mesh>
+            <mesh position={[0.01, 0.012, 0.015]}>
+              <sphereGeometry args={[0.009, 8, 8]} />
+              <meshBasicMaterial color="#ffffff" />
+            </mesh>
+          </group>
+        ))}
+      </group>
+      {/* الحاجبان */}
+      {[-1, 1].map((sx) => (
+        <mesh key={sx} position={[sx * 0.088, 0.098, 0.235]} rotation={[0, 0, sx * -0.12]}>
+          <boxGeometry args={[0.1, 0.024, 0.02]} />
+          {toon(HAIR)}
+        </mesh>
+      ))}
+      {/* الأنف */}
+      <mesh position={[0, -0.03, 0.262]} scale={[0.9, 1.1, 1]}>
+        <sphereGeometry args={[0.034, 16, 16]} />
+        {toon(SKIN_DARK)}
+      </mesh>
+      {/* الشارب */}
+      {[-1, 1].map((sx) => (
+        <mesh key={sx} position={[sx * 0.04, -0.085, 0.245]} rotation={[0, 0, Math.PI / 2 + sx * 0.25]}>
+          <capsuleGeometry args={[0.01, 0.055, 4, 8]} />
+          {toon(HAIR)}
+        </mesh>
+      ))}
+      {/* الابتسامة */}
+      <mesh position={[0, -0.112, 0.236]} rotation={[0.15, 0, 0]}>
+        <circleGeometry args={[0.062, 24, Math.PI, Math.PI]} />
+        <meshBasicMaterial color="#fbf6ee" side={THREE.DoubleSide} />
+      </mesh>
+      <mesh position={[0, -0.112, 0.238]} rotation={[0.15, 0, Math.PI]}>
+        <torusGeometry args={[0.062, 0.011, 8, 24, Math.PI]} />
+        <meshBasicMaterial color="#5b2a1c" />
+      </mesh>
+      {/* لحية السكسوكة */}
+      <mesh position={[0, -0.215, 0.19]} scale={[1.2, 0.9, 0.8]}>
+        <sphereGeometry args={[0.04, 16, 16]} />
+        {toon(HAIR)}
+      </mesh>
+      <mesh position={[0, -0.235, 0.12]} scale={[2.6, 0.55, 1.6]}>
+        <sphereGeometry args={[0.05, 16, 16]} />
+        <meshToonMaterial color={HAIR} transparent opacity={0.55} />
+      </mesh>
+    </group>
+  );
+}
+
+// كرسي مكتب
+function Chair() {
+  return (
+    <group position={[0, 0, -0.28]}>
+      <RoundedBox args={[0.9, 0.12, 0.85]} radius={0.05} position={[0, 0.85, 0]}>
+        <meshStandardMaterial color="#1c1830" roughness={0.6} />
+      </RoundedBox>
+      <RoundedBox args={[0.86, 1.05, 0.1]} radius={0.06} position={[0, 1.45, -0.44]} rotation={[-0.1, 0, 0]}>
+        <meshStandardMaterial color="#1c1830" roughness={0.6} />
+      </RoundedBox>
+      <mesh position={[0, 1.45, -0.385]} rotation={[-0.1, 0, 0]}>
+        <boxGeometry args={[0.5, 0.7, 0.02]} />
+        <meshStandardMaterial color="#7c3aed" emissive="#7c3aed" emissiveIntensity={0.6} />
+      </mesh>
+      <mesh position={[0, 0.5, 0]}>
+        <cylinderGeometry args={[0.04, 0.05, 0.6, 12]} />
+        <meshStandardMaterial color="#9ca3af" metalness={0.9} roughness={0.2} />
+      </mesh>
+      {Array.from({ length: 5 }).map((_, i) => {
+        const a = (i / 5) * Math.PI * 2;
+        return (
+          <group key={i} rotation={[0, a, 0]}>
+            <mesh position={[0.22, 0.17, 0]} rotation={[0, 0, Math.PI / 2]}>
+              <cylinderGeometry args={[0.03, 0.03, 0.44, 8]} />
+              <meshStandardMaterial color="#2a2d3e" metalness={0.8} roughness={0.3} />
+            </mesh>
+            <mesh position={[0.42, 0.07, 0]}>
+              <sphereGeometry args={[0.055, 12, 12]} />
+              <meshStandardMaterial color="#111" />
+            </mesh>
+          </group>
+        );
+      })}
+    </group>
+  );
+}
+
+// مكتب مع شريط إضاءة
+function Desk() {
+  return (
+    <group>
+      <RoundedBox args={[2.7, 0.08, 1.15]} radius={0.03} position={[0, 1.3, 0.62]}>
+        <meshStandardMaterial color="#2b2140" roughness={0.5} metalness={0.2} />
+      </RoundedBox>
+      <mesh position={[0, 1.255, 1.195]}>
+        <boxGeometry args={[2.66, 0.02, 0.01]} />
+        <meshBasicMaterial color="#c084fc" toneMapped={false} />
+      </mesh>
+      {[[-1.25, 0.12], [1.25, 0.12], [-1.25, 1.12], [1.25, 1.12]].map(([x, z], i) => (
+        <mesh key={i} position={[x, 0.63, z]}>
+          <boxGeometry args={[0.06, 1.26, 0.06]} />
+          <meshStandardMaterial color="#1a1528" metalness={0.6} roughness={0.3} />
+        </mesh>
+      ))}
+      {/* كوب قهوة */}
+      <group position={[0.9, 1.42, 0.5]}>
+        <mesh>
+          <cylinderGeometry args={[0.08, 0.07, 0.17, 20]} />
+          <meshToonMaterial color="#f5f3ff" />
+        </mesh>
+        <mesh position={[0.09, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <torusGeometry args={[0.045, 0.012, 8, 16]} />
+          <meshToonMaterial color="#f5f3ff" />
+        </mesh>
+        <mesh position={[0, 0.086, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[0.07, 20]} />
+          <meshBasicMaterial color="#3b2416" />
+        </mesh>
+        <Sparkles count={10} scale={[0.15, 0.4, 0.15]} position={[0, 0.3, 0]} size={3} speed={0.6} color="#e9d5ff" />
+      </group>
+    </group>
+  );
+}
+
+// لابتوب على المكتب: الشاشة تواجه الشخصية وظهرها يحمل شعاراً مضيئاً
+function DeskLaptop({ tex }) {
+  return (
+    <group position={[0, 1.36, 0.6]}>
+      <RoundedBox args={[0.92, 0.04, 0.62]} radius={0.015}>
+        <meshStandardMaterial color="#3a3f52" metalness={0.85} roughness={0.25} />
+      </RoundedBox>
+      <mesh position={[0, 0.022, -0.05]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[0.9, 0.36]} />
+        <meshStandardMaterial color="#14161f" emissive="#7c3aed" emissiveIntensity={0.25} />
+      </mesh>
+      <group position={[0, 0.02, 0.3]} rotation={[0.3, 0, 0]}>
+        <RoundedBox args={[0.92, 0.56, 0.03]} radius={0.015} position={[0, 0.28, 0]}>
+          <meshStandardMaterial color="#3a3f52" metalness={0.85} roughness={0.25} />
+        </RoundedBox>
+        <mesh position={[0, 0.28, -0.017]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[0.85, 0.5]} />
+          <meshBasicMaterial map={tex} toneMapped={false} />
+        </mesh>
+        <group position={[0, 0.3, 0.02]}>
+          <Center>
+            <Text3D font={fontUrl} size={0.13} height={0.01} curveSegments={4}>
+              {"</>"}
+              <meshBasicMaterial color="#c084fc" toneMapped={false} />
+            </Text3D>
+          </Center>
+        </group>
+        <pointLight position={[0, 0.35, -0.4]} intensity={2.5} color="#8b5cf6" distance={1.6} />
+      </group>
+    </group>
+  );
+}
+
+// الشخصية الكرتونية جالسة وتبرمج
+function Coder({ tex }) {
+  const head = useRef();
+  const eyes = useRef();
+  const leftHand = useRef();
+  const rightHand = useRef();
+  const torso = useRef();
+
+  useFrame((s) => {
+    const t = s.clock.elapsedTime;
+    // الكتابة على الكيبورد
+    leftHand.current.position.y = Math.max(0, Math.sin(t * 13)) * 0.035;
+    rightHand.current.position.y = Math.max(0, Math.sin(t * 13 + 1.7)) * 0.035;
+    // التنفس
+    torso.current.scale.y = 1 + Math.sin(t * 1.8) * 0.012;
+    // ينظر للشاشة، وأحياناً يرفع رأسه للزائر ويتبع الماوس
+    const lookUp = THREE.MathUtils.smoothstep(Math.sin(t * 0.45), 0.55, 0.9);
+    const targetX = THREE.MathUtils.lerp(0.32, -0.05 - s.pointer.y * 0.15, lookUp);
+    const targetY = THREE.MathUtils.lerp(Math.sin(t * 0.7) * 0.06, s.pointer.x * 0.45, lookUp);
+    head.current.rotation.x += (targetX - head.current.rotation.x) * 0.08;
+    head.current.rotation.y += (targetY - head.current.rotation.y) * 0.08;
+    // رمش العين
+    const blink = t % 3.6 < 0.12 ? 0.1 : 1;
+    eyes.current.scale.y = blink;
+  });
+
+  return (
+    <group>
+      <Chair />
+      <Desk />
+      <DeskLaptop tex={tex} />
+
+      {/* الساقان والحذاء */}
+      <mesh position={[0, 1.0, -0.22]}>
+        <boxGeometry args={[0.58, 0.22, 0.48]} />
+        {toon(BLACK)}
+      </mesh>
+      {[-1, 1].map((sx) => (
+        <group key={sx}>
+          <Limb from={[sx * 0.15, 1.0, -0.2]} to={[sx * 0.16, 1.0, 0.36]} r={0.11}>{toon("#141726")}</Limb>
+          <Limb from={[sx * 0.16, 1.0, 0.38]} to={[sx * 0.17, 0.36, 0.42]} r={0.095}>{toon("#141726")}</Limb>
+          <RoundedBox args={[0.17, 0.1, 0.32]} radius={0.04} position={[sx * 0.17, 0.3, 0.5]}>
+            {toon(BLACK)}
+          </RoundedBox>
+        </group>
+      ))}
+
+      {/* الجذع: بدلة كحلية وقميص أسود وربطة عنق */}
+      <group ref={torso} position={[0, 1.45, -0.24]} rotation={[0.12, 0, 0]}>
+        <mesh scale={[1.12, 1, 0.72]}>
+          <capsuleGeometry args={[0.29, 0.42, 8, 16]} />
+          {toon(NAVY)}
+        </mesh>
+        <mesh position={[0, 0.17, 0.205]} rotation={[0, 0, Math.PI]}>
+          <coneGeometry args={[0.12, 0.42, 3]} />
+          {toon(BLACK)}
+        </mesh>
+        <mesh position={[0, 0.12, 0.214]}>
+          <boxGeometry args={[0.055, 0.34, 0.01]} />
+          <meshToonMaterial color="#000000" />
+        </mesh>
+        <mesh position={[0, 0.3, 0.214]}>
+          <boxGeometry args={[0.07, 0.05, 0.02]} />
+          <meshToonMaterial color="#000000" />
+        </mesh>
+        <mesh position={[0, 0.05, 0.218]}>
+          <boxGeometry args={[0.09, 0.012, 0.01]} />
+          <meshStandardMaterial color="#d1d5db" metalness={1} roughness={0.2} />
+        </mesh>
+        {[-1, 1].map((sx) => (
+          <mesh key={sx} position={[sx * 0.1, 0.16, 0.2]} rotation={[0, 0, sx * 0.38]}>
+            <boxGeometry args={[0.07, 0.4, 0.02]} />
+            {toon(NAVY_LIGHT)}
+          </mesh>
+        ))}
+        {/* شارة التخرج */}
+        <mesh position={[0.17, 0.12, 0.205]}>
+          <boxGeometry args={[0.08, 0.03, 0.01]} />
+          <meshStandardMaterial color="#e5e7eb" metalness={0.8} roughness={0.3} />
+        </mesh>
+      </group>
+
+      {/* الرقبة والياقة */}
+      <mesh position={[0, 1.88, -0.2]}>
+        <cylinderGeometry args={[0.075, 0.085, 0.16, 16]} />
+        {toon(SKIN)}
+      </mesh>
+      <mesh position={[0, 1.82, -0.2]}>
+        <cylinderGeometry args={[0.105, 0.115, 0.07, 16]} />
+        {toon(BLACK)}
+      </mesh>
+
+      <Head headRef={head} eyesRef={eyes} />
+
+      {/* الذراعان واليدان على الكيبورد */}
+      {[-1, 1].map((sx) => (
+        <group key={sx}>
+          <Limb from={[sx * 0.36, 1.7, -0.22]} to={[sx * 0.42, 1.38, 0.02]} r={0.085}>{toon(NAVY)}</Limb>
+          <Limb from={[sx * 0.42, 1.38, 0.02]} to={[sx * 0.2, 1.43, 0.36]} r={0.075}>{toon(NAVY)}</Limb>
+          <group ref={sx < 0 ? leftHand : rightHand}>
+            <mesh position={[sx * 0.17, 1.43, 0.44]} scale={[1, 0.6, 1.25]}>
+              <sphereGeometry args={[0.065, 16, 16]} />
+              {toon(SKIN)}
+            </mesh>
+          </group>
+          {sx < 0 && (
+            <mesh position={[-0.215, 1.43, 0.33]} rotation={[Math.PI / 2 - 0.25, 0, 0.55]}>
+              <cylinderGeometry args={[0.072, 0.072, 0.05, 16]} />
+              <meshStandardMaterial color="#111111" metalness={0.8} roughness={0.25} />
+            </mesh>
+          )}
+        </group>
+      ))}
+
+      {/* شاشة هولوغرام عائمة تعرض الكود */}
+      <Float speed={1.4} floatIntensity={0.5} rotationIntensity={0.05}>
+        <group position={[1.45, 2.4, 0.2]} rotation={[0, -0.5, 0]} scale={0.82}>
+          <mesh position={[0, 0, -0.01]}>
+            <planeGeometry args={[1.62, 1.06]} />
+            <meshBasicMaterial color="#7c3aed" transparent opacity={0.35} toneMapped={false} />
+          </mesh>
+          <mesh>
+            <planeGeometry args={[1.5, 0.94]} />
+            <meshBasicMaterial map={tex} transparent opacity={0.92} toneMapped={false} />
+          </mesh>
+        </group>
+      </Float>
+    </group>
+  );
+}
+
+function CodeSource({ children }) {
   const { ctx, tex } = useCodeTexture();
   const state = useRef({ chars: 0, acc: 0, hold: 0 });
-  const keys = useRef();
-
   useFrame((s, delta) => {
     const st = state.current;
     st.acc += delta;
@@ -103,57 +475,7 @@ function Laptop() {
     drawCode(ctx, st.chars, Math.floor(s.clock.elapsedTime * 2) % 2 === 0);
     tex.needsUpdate = true;
   });
-
-  // لوحة مفاتيح بمفاتيح مُكررة (Instanced)
-  const keyMatrices = useMemo(() => {
-    const m = [];
-    const o = new THREE.Object3D();
-    for (let r = 0; r < 4; r++)
-      for (let c = 0; c < 13; c++) {
-        o.position.set(-1.32 + c * 0.22, 0.075, -0.55 + r * 0.22);
-        o.updateMatrix();
-        m.push(o.matrix.clone());
-      }
-    return m;
-  }, []);
-
-  return (
-    <group>
-      {/* القاعدة */}
-      <RoundedBox args={[3.2, 0.12, 2.1]} radius={0.05} smoothness={4}>
-        <meshStandardMaterial color="#2a2d3e" metalness={0.85} roughness={0.25} />
-      </RoundedBox>
-      <instancedMesh
-        ref={(m) => {
-          if (!m || keys.current) return;
-          keyMatrices.forEach((mat, i) => m.setMatrixAt(i, mat));
-          m.instanceMatrix.needsUpdate = true;
-          keys.current = m;
-        }}
-        args={[null, null, keyMatrices.length]}
-      >
-        <boxGeometry args={[0.18, 0.03, 0.18]} />
-        <meshStandardMaterial color="#14161f" emissive="#7c3aed" emissiveIntensity={0.15} roughness={0.6} />
-      </instancedMesh>
-      <mesh position={[0, 0.065, 0.62]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[1, 0.5]} />
-        <meshStandardMaterial color="#1b1e2b" roughness={0.4} metalness={0.5} />
-      </mesh>
-
-      {/* الشاشة */}
-      <group position={[0, 0.06, -1.03]} rotation={[-0.25, 0, 0]}>
-        <RoundedBox args={[3.2, 2.05, 0.08]} radius={0.05} smoothness={4} position={[0, 1.02, 0]}>
-          <meshStandardMaterial color="#2a2d3e" metalness={0.85} roughness={0.25} />
-        </RoundedBox>
-        <mesh position={[0, 1.04, 0.045]}>
-          <planeGeometry args={[3.0, 1.875]} />
-          <meshBasicMaterial map={tex} toneMapped={false} />
-        </mesh>
-        {/* توهج الشاشة */}
-        <pointLight position={[0, 1, 0.8]} intensity={6} color="#8b5cf6" distance={4} />
-      </group>
-    </group>
-  );
+  return children(tex);
 }
 
 // ---------- رموز برمجية ثلاثية الأبعاد طائرة ----------
@@ -182,10 +504,10 @@ function Rig({ children }) {
   useFrame((s) => {
     const scroll = Math.min(window.scrollY / window.innerHeight, 1.5);
     const g = ref.current;
-    g.rotation.y += (s.pointer.x * 0.35 - 0.35 + scroll * 0.9 - g.rotation.y) * 0.06;
+    g.rotation.y += (s.pointer.x * 0.3 - 0.32 + scroll * 0.9 - g.rotation.y) * 0.06;
     g.rotation.x += (-s.pointer.y * 0.12 + scroll * 0.25 - g.rotation.x) * 0.06;
-    g.position.y += (scroll * 1.6 - 0.35 - g.position.y) * 0.08;
-    const sc = (s.size.width < 600 ? 0.68 : 1) * (1 - scroll * 0.25);
+    g.position.y += (scroll * 1.6 - g.position.y) * 0.08;
+    const sc = (s.size.width < 600 ? 0.72 : 1) * (1 - scroll * 0.25);
     g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, sc, 0.08));
   });
   return <group ref={ref}>{children}</group>;
@@ -193,21 +515,21 @@ function Rig({ children }) {
 
 export default function HeroScene() {
   return (
-    <Canvas camera={{ position: [0, 1.5, 6.6], fov: 42 }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
+    <Canvas camera={{ position: [0, 0.55, 5.3], fov: 42 }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
       <ambientLight intensity={0.45} />
       <directionalLight position={[5, 6, 5]} intensity={1.6} />
-      <pointLight position={[-4, 1, 3]} intensity={30} color="#f472b6" />
+      <pointLight position={[-4, 1, 3]} intensity={10} color="#f472b6" />
+      <directionalLight position={[-2, 3, 4]} intensity={0.9} color="#ffe4cc" />
       <pointLight position={[4, 2, -2]} intensity={30} color="#60a5fa" />
 
       <Rig>
-        <Float speed={1.2} floatIntensity={0.4} rotationIntensity={0.1}>
-          <Laptop />
-        </Float>
-        <Symbol3D text="</>" position={[-2.2, 2.0, -0.6]} color="#a78bfa" size={0.5} />
-        <Symbol3D text="{ }" position={[2.1, 2.2, -0.8]} color="#f472b6" speed={0.8} />
-        <Symbol3D text="=>" position={[2.2, -0.3, 0.6]} color="#22d3ee" size={0.4} speed={1.2} />
-        <Symbol3D text="( )" position={[-2.2, -0.2, 0.5]} color="#f59e0b" size={0.4} speed={0.9} />
-        <Symbol3D text=";" position={[0.2, 2.9, -1.4]} color="#a3e635" size={0.5} speed={1.1} />
+        <group position={[0, -1.55, 0]}>
+          <CodeSource>{(tex) => <Coder tex={tex} />}</CodeSource>
+        </group>
+        <Symbol3D text="</>" position={[-1.9, 1.75, -0.6]} color="#a78bfa" size={0.45} />
+        <Symbol3D text="{ }" position={[-2.0, 0.2, 0.3]} color="#f472b6" size={0.4} speed={0.8} />
+        <Symbol3D text="=>" position={[2.0, -0.6, 0.6]} color="#22d3ee" size={0.38} speed={1.2} />
+        <Symbol3D text=";" position={[0.6, 2.0, -1.2]} color="#a3e635" size={0.45} speed={1.1} />
       </Rig>
 
       <Sparkles count={70} scale={[9, 6, 4]} size={2.2} speed={0.4} color="#c4b5fd" />
