@@ -54,11 +54,6 @@ export default function HeroSection() {
         animate="visible"
       >
         <motion.div variants={itemVariants} className="flex items-center gap-3 mb-6">
-          <img
-            src="/profile.jpg"
-            alt="Ali profile"
-            className="w-14 h-14 rounded-full object-cover ring-2 ring-purple-500/70 shadow-lg shadow-purple-500/40"
-          />
           <span className="px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-white/5 border border-white/10 text-purple-200 backdrop-blur">
             Available for work
           </span>

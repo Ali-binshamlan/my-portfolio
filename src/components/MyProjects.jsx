@@ -7,7 +7,7 @@ export default function MyProjects() {
   return (
     <>
       <ProjectsOrbit projects={projects} title="Featured Projects" />
-      <div className="text-center -mt-10 mb-10 relative z-10">
+      <div className="text-center mt-16 mb-24 relative z-10">
         <Link
           to="/projects"
           style={{ boxShadow: "0 6px 0 #4c1d95, 0 18px 40px rgba(236,72,153,.35)" }}

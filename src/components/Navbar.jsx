@@ -14,26 +14,23 @@ const links = [
   { id: "contact", label: "Contact", icon: FaEnvelope },
 ];
 
-// شعار على شكل مكعب ثلاثي الأبعاد يدور
-function LogoCube() {
-  const face = "absolute inset-0 grid place-items-center rounded-md border border-white/20 font-black text-[11px] text-white";
-  const s = 28;
+// صورة علي الشخصية بإطار متوهج يدور
+function Avatar({ size = 36 }) {
   return (
-    <div className="relative" style={{ width: s, height: s, perspective: 300 }} aria-hidden>
-      <motion.div
-        className="absolute inset-0"
-        style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: 360, rotateX: [0, 20, 0, -20, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-      >
-        <div className={`${face} bg-purple-600/90`} style={{ transform: `translateZ(${s / 2}px)` }}>AB</div>
-        <div className={`${face} bg-pink-600/90`} style={{ transform: `rotateY(180deg) translateZ(${s / 2}px)` }}>{"</>"}</div>
-        <div className={`${face} bg-indigo-600/90`} style={{ transform: `rotateY(90deg) translateZ(${s / 2}px)` }}>{"{}"}</div>
-        <div className={`${face} bg-fuchsia-600/90`} style={{ transform: `rotateY(-90deg) translateZ(${s / 2}px)` }}>JS</div>
-        <div className={`${face} bg-violet-700/90`} style={{ transform: `rotateX(90deg) translateZ(${s / 2}px)` }} />
-        <div className={`${face} bg-violet-900/90`} style={{ transform: `rotateX(-90deg) translateZ(${s / 2}px)` }} />
-      </motion.div>
-    </div>
+    <span className="relative grid place-items-center shrink-0" style={{ width: size, height: size }} aria-hidden>
+      <motion.span
+        className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,#a855f7,#ec4899,#f59e0b,#a855f7)]"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+      />
+      <img
+        src="/avatar-nav.jpg"
+        alt=""
+        className="relative rounded-full object-cover border-2 border-gray-950 transition-transform duration-300 group-hover:scale-110"
+        style={{ width: size - 4, height: size - 4 }}
+      />
+      <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400 border-2 border-gray-950" />
+    </span>
   );
 }
 
@@ -98,7 +95,7 @@ export default function Navbar() {
           }`}
         >
           <button onClick={() => go("home")} className="flex items-center gap-3 group" aria-label="Go to top">
-            <LogoCube />
+            <Avatar size={38} />
             <span className="font-bold text-white tracking-tight">
               Ali<span className="text-purple-400">.</span>
               <span className="hidden lg:inline text-gray-400 font-medium"> Bin Shamlan</span>
@@ -152,8 +149,8 @@ export default function Navbar() {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="md:hidden fixed top-2 inset-x-3 z-50 flex items-center justify-between rounded-2xl border border-white/10 bg-gray-950/70 backdrop-blur-xl px-3 py-2 shadow-[0_10px_30px_-10px_rgba(124,58,237,0.6)]"
           >
-            <button onClick={() => go("home")} className="flex items-center gap-2" aria-label="Go to top">
-              <LogoCube />
+            <button onClick={() => go("home")} className="flex items-center gap-2 group" aria-label="Go to top">
+              <Avatar size={32} />
               <span className="font-bold text-white">
                 Ali<span className="text-purple-400">.</span>
               </span>
