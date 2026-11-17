@@ -27,7 +27,7 @@ export default function WorkExperience() {
   }));
 
   return (
-    <section className="relative bg-gray-950 py-20 px-6 md:px-10 lg:px-20 text-gray-100 overflow-hidden min-h-screen flex flex-col justify-center">
+    <section className="relative py-20 px-6 md:px-10 lg:px-20 text-gray-100 overflow-hidden min-h-screen flex flex-col justify-center">
       {/* خطوط متحركة في الخلفية */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(8)].map(

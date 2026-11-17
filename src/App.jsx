@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
@@ -9,9 +10,14 @@ import GetInTouch from "./components/GetInTouch";
 import Projects from "./components/Projects";
 import ScrollToTop from "./components/ScrollToTop";
 
+const SpaceBackground = lazy(() => import("./components/three/SpaceBackground"));
+
 export default function App() {
   return (
     <>
+      <Suspense fallback={null}>
+        <SpaceBackground />
+      </Suspense>
       <Navbar />
       <ScrollToTop /> 
       <Routes>

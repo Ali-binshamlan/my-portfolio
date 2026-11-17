@@ -6,7 +6,7 @@ export default function GetInTouch() {
   return (
     <section
       id="contact"
-      className="bg-gray-950 py-20 px-6 lg:px-20 text-gray-100"
+      className="py-20 px-6 lg:px-20 text-gray-100"
     >
       <div className="max-w-6xl mx-auto bg-gray-900 rounded-3xl shadow-lg p-12 border border-gray-800">
         <h2 className="text-4xl font-extrabold text-center text-white mb-14">

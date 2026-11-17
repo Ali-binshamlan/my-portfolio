@@ -1,4 +1,7 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
+
+const HeroScene = lazy(() => import("./three/HeroScene"));
 import { FaFolderOpen, FaFileAlt } from "react-icons/fa";
 
 // متحركات العناصر الأبناء (تسلسل ظهور)
@@ -21,78 +24,47 @@ const containerVariants = {
 };
 
 export default function HeroSection() {
-  // دوائر الخلفية المتحركة
-  const floatingVariants = (i) => ({
-    animate: {
-      y: [0, 20 + i * 5, 0],
-      x: [0, 10 + i * 4, 0],
-      scale: [1, 1.05, 1],
-      transition: {
-        duration: 8 + i * 2,
-        repeat: Infinity,
-        repeatType: "loop",
-        ease: "easeInOut",
-        delay: i * 1.5,
-      },
-    },
-  });
-
   return (
-    <section className="relative flex flex-col md:flex-row items-center justify-center p-6 mx-auto gap-10 bg-gray-900 text-white min-h-screen overflow-hidden">
-      {/* خلفية متحركة: دوائر متوهجة */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0.2 }}
-          animate="animate"
-          variants={floatingVariants(i)}
-          className="absolute rounded-full filter blur-2xl pointer-events-none"
-          style={{
-            width: `${100 + i * 30}px`,
-            height: `${100 + i * 30}px`,
-            background:
-              i % 2 === 0
-                ? "radial-gradient(circle, #a78bfa, transparent)"
-                : "radial-gradient(circle, #f472b6, transparent)",
-            top: `${10 + i * 12}%`,
-            left: `${10 + i * 10}%`,
-            zIndex: 0,
-          }}
-        />
-      ))}
-
-      {/* الصورة الرئيسية مع تدرج وظل */}
+    <section className="relative flex flex-col md:flex-row items-center justify-center p-6 mx-auto gap-10 text-white min-h-screen overflow-hidden md:pt-24 pb-24 max-w-7xl">
+      {/* مشهد ثلاثي الأبعاد تفاعلي */}
       <motion.div
-        className="flex-shrink-0 rounded-full p-2 bg-white shadow-2xl relative z-10"
-        initial={{ opacity: 0, scale: 0.7, rotate: -15 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ duration: 1, type: "spring", stiffness: 100 }}
-        whileHover={{
-          scale: 1.05,
-          rotate: [0, 2, -2, 0],
-          boxShadow: "0 25px 50px -12px rgba(168, 85, 247, 0.4)",
-        }}
+        className="relative z-10 w-full md:w-1/2 h-[360px] md:h-[600px] order-first md:order-last"
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
       >
-        <img
-          src="/profile.jpg"
-          alt="Ali profile"
-          className="w-40 h-40 md:w-64 md:h-64 rounded-full object-cover"
-          loading="lazy"
-        />
+        <div className="absolute inset-0 rounded-full bg-purple-600/20 blur-3xl" />
+        <Suspense fallback={null}>
+          <HeroScene />
+        </Suspense>
       </motion.div>
 
       {/* النص مع الأزرار */}
       <motion.div
-        className="text-left relative z-10 max-w-xl"
+        className="text-left relative z-10 max-w-xl md:w-1/2"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
+        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-6">
+          <img
+            src="/profile.jpg"
+            alt="Ali profile"
+            className="w-14 h-14 rounded-full object-cover ring-2 ring-purple-500/70 shadow-lg shadow-purple-500/40"
+          />
+          <span className="px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-white/5 border border-white/10 text-purple-200 backdrop-blur">
+            Available for work
+          </span>
+        </motion.div>
+
         <motion.h1
           className="text-5xl md:text-7xl font-extrabold text-white mb-4 drop-shadow-lg"
           variants={itemVariants}
         >
-          Hi, I'm <span className="text-white">Ali</span>
+          Hi, I'm{" "}
+          <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">
+            Ali
+          </span>
         </motion.h1>
 
         <motion.p

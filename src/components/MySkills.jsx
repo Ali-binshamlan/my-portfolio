@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import TiltCard from "./three/TiltCard";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaBootstrap } from "react-icons/fa";
 import {
   SiTypescript,
@@ -57,7 +58,7 @@ export default function MySkills() {
   return (
     <section
       id="skills"
-      className="bg-gray-950 text-gray-100 py-20 px-6 lg:px-20"
+      className="text-gray-100 py-20 px-6 lg:px-20"
     >
       <h2 className="text-4xl font-extrabold text-center text-white mb-14">
         My Skills
@@ -71,8 +72,8 @@ export default function MySkills() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
             viewport={{ once: true }}
-            className="bg-gray-900 p-8 rounded-3xl shadow-xl border border-gray-800 hover:border-purple-500 hover:shadow-purple-500/20 hover:-translate-y-1 transition-all duration-300"
           >
+            <TiltCard className="bg-gray-900/40 backdrop-blur-xl p-8 rounded-3xl shadow-[0_20px_60px_-20px_rgba(139,92,246,0.45)] border border-white/10 hover:border-purple-500 transition-colors duration-300">
             <h3 className="text-2xl font-bold text-purple-400 mb-6">
               {category.title}
             </h3>
@@ -81,13 +82,15 @@ export default function MySkills() {
               {category.skills.map((skill, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-3 bg-gray-800 px-4 py-3 rounded-xl text-gray-200 font-medium hover:bg-gray-700 transition"
+                  style={{ transform: "translateZ(30px)" }}
+                  className="flex items-center gap-3 bg-white/5 border border-white/5 px-4 py-3 rounded-xl text-gray-200 font-medium hover:bg-gray-700 transition"
                 >
                   {iconMap[skill] || <span className="text-xl">🎯</span>}
                   <span>{skill}</span>
                 </div>
               ))}
             </div>
+            </TiltCard>
           </motion.div>
         ))}
       </div>

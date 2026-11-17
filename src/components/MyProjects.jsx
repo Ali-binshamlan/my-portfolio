@@ -2,19 +2,7 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight, FaCode, FaRocket } from "react-icons/fa";
 import { projects } from "./MyProjectsData";
-
-// متحركات التحويم للبطاقة (تم تعديل قيم التحويم لتناسب الحجم الأصغر)
-const cardHoverVariants = {
-  hover: {
-    scale: 1.03, // تكبير طفيف
-    y: -5, // ارتفاع طفيف للأعلى
-    rotate: -0.5, // دوران خفيف جداً
-    boxShadow: "0 15px 30px -12px rgba(244, 114, 182, 0.4)", // ظل وردي
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
+import TiltCard from "./three/TiltCard";
 
 export default function MyProjects() {
   const navigate = useNavigate();
@@ -22,7 +10,7 @@ export default function MyProjects() {
   return (
     <section
       id="projects"
-      className="relative bg-gray-950 py-16 px-4 lg:px-12 text-gray-100 overflow-hidden" // ⬅️ تقليل padding
+      className="relative py-16 px-4 lg:px-12 text-gray-100 overflow-hidden" // ⬅️ تقليل padding
     >
       {/* خلفية متحركة - نقاط شهابية متوهجة (لا تغيير لتبقى مؤثرة) */}
       <div className="absolute inset-0 -z-10 opacity-30 pointer-events-none">
@@ -73,16 +61,9 @@ export default function MyProjects() {
               type: "spring",
               stiffness: 100,
             }}
-            whileHover={{
-              scale: 1.03,
-              y: -5,
-              rotate: -0.5,
-              boxShadow: "0 15px 30px -12px rgba(244, 114, 182, 0.4)",
-              transition: { duration: 0.3 },
-            }}
-            className="relative bg-gray-900/50  backdrop-blur-md rounded-2xl shadow-xl overflow-visible
-             flex flex-col border border-gray-700/50 cursor-pointer"
+            className="h-full"
           >
+            <TiltCard className={`relative bg-gray-900/50  backdrop-blur-md rounded-2xl shadow-xl overflow-visible              flex flex-col border border-gray-700/50 cursor-pointer bg-gray-900/40 backdrop-blur-xl shadow-[0_20px_60px_-20px_rgba(139,92,246,0.45)]`}>
             {/* لمعة زجاجية */}
             <div className="absolute inset-0 rounded-2xl bg-white/5  opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
 
@@ -128,6 +109,7 @@ export default function MyProjects() {
                 )}
               </div>
             </div>
+            </TiltCard>
           </motion.div>
         ))}
       </div>

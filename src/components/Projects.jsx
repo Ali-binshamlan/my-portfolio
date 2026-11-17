@@ -2,19 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { FaCode, FaRocket } from "react-icons/fa";
 import { projects } from "./MyProjectsData";
-
-// متحركات التحويم للبطاقة (تم تعديل قيم التحويم لتناسب الحجم الأصغر)
-const cardHoverVariants = {
-  hover: {
-    scale: 1.03, 
-    y: -5, 
-    rotate: -0.5, // دوران خفيف جداً
-    boxShadow: "0 15px 30px -12px rgba(244, 114, 182, 0.3)", // ظل وردي أخف
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
+import TiltCard from "./three/TiltCard";
 
 export default function MyProjects() {
   const navigate = useNavigate();
@@ -22,7 +10,7 @@ export default function MyProjects() {
   return (
     <section
       id="projects"
-      className="relative bg-gray-950 py-16 px-4 lg:px-12 text-gray-100 overflow-hidden mt-0 md:mt-10" // ⬅️ تقليل الـ padding
+      className="relative py-16 px-4 lg:px-12 text-gray-100 overflow-hidden mt-0 md:mt-10" // ⬅️ تقليل الـ padding
     >
       {/* خلفية متحركة - نقاط شهابية متوهجة (تقليل Opacity) */}
       <div className="absolute inset-0 -z-10 opacity-20 pointer-events-none"> {/* ⬅️ تقليل الشفافية */}
@@ -67,13 +55,9 @@ export default function MyProjects() {
             transition={{ duration: 0.6, delay: index * 0.15, type: "spring", stiffness: 90 }} // ⬅️ تسريع بسيط
             viewport={{ once: true, amount: 0.3 }}
             
-            variants={cardHoverVariants}
-            whileHover="hover"
-            
-            className=" rounded-2xl shadow-lg overflow-hidden
-                       flex flex-col border border-gray-700/50 transition duration-300 transform 
-                       group relative hover:border-pink-500/80 cursor-pointer" 
+            className="h-full"
           >
+            <TiltCard className={` rounded-2xl shadow-lg overflow-hidden                        flex flex-col border border-gray-700/50 transition duration-300 transform                         group relative hover:border-pink-500/80 cursor-pointer bg-gray-900/40 backdrop-blur-xl shadow-[0_20px_60px_-20px_rgba(139,92,246,0.45)]`}>
             {/* لمعة زجاجية عند التحويم */}
             <div className="absolute inset-0 rounded-2xl opacity-0 transition duration-500 
                             bg-white/5 group-hover:opacity-100 pointer-events-none"></div>
@@ -124,6 +108,7 @@ export default function MyProjects() {
                 )}
               </div>
             </div>
+            </TiltCard>
           </motion.div>
         ))}
       </div>
