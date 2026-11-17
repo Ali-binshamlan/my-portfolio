@@ -110,9 +110,11 @@ function Limb({ from, to, r = 0.07, children }) {
 
 const SKIN = "#9a6240";
 const HAIR = "#17110e";
-const NAVY = "#1c2f8f";
-const NAVY_LIGHT = "#2840a8";
-const BLACK = "#0d0d12";
+// لون البدلة مطابق للبنطال
+const PANTS = "#141726";
+const NAVY = PANTS;
+const NAVY_LIGHT = "#252a44";
+const BLACK = "#050507";
 
 const toon = (color) => <meshToonMaterial color={color} />;
 
@@ -279,8 +281,8 @@ function Coder({ tex }) {
       </mesh>
       {[-1, 1].map((sx) => (
         <group key={sx}>
-          <Limb from={[sx * 0.15, 1.0, -0.2]} to={[sx * 0.16, 1.0, 0.36]} r={0.11}>{toon("#141726")}</Limb>
-          <Limb from={[sx * 0.16, 1.0, 0.38]} to={[sx * 0.17, 0.36, 0.42]} r={0.095}>{toon("#141726")}</Limb>
+          <Limb from={[sx * 0.15, 1.0, -0.2]} to={[sx * 0.16, 1.0, 0.36]} r={0.11}>{toon(PANTS)}</Limb>
+          <Limb from={[sx * 0.16, 1.0, 0.38]} to={[sx * 0.17, 0.36, 0.42]} r={0.095}>{toon(PANTS)}</Limb>
           <RoundedBox args={[0.17, 0.1, 0.32]} radius={0.04} position={[sx * 0.17, 0.3, 0.5]}>
             {toon(BLACK)}
           </RoundedBox>
