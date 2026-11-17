@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import TiltCard from "./three/TiltCard";
 import { projects } from "./MyProjectsData";
 import {
   FaExternalLinkAlt,
@@ -50,17 +51,20 @@ export default function ProjectDetails() {
   };
 
   const screenshotVariants = {
-    hidden: { opacity: 0, scale: 0.9, rotateX: 5 },
+    hidden: { opacity: 0, scale: 0.85, rotateX: 45, z: -150 },
     visible: {
       opacity: 1,
       scale: 1,
       rotateX: 0,
+      z: 0,
       transition: { duration: 0.5, ease: "easeOut" },
     },
     hover: {
-      scale: 1.08,
-      rotate: 1,
-      boxShadow: "0 12px 25px rgba(168, 85, 247, 0.35)",
+      scale: 1.06,
+      rotateY: -12,
+      rotateX: 6,
+      z: 40,
+      boxShadow: "20px 25px 40px rgba(168, 85, 247, 0.45)",
     },
   };
 
@@ -79,14 +83,14 @@ export default function ProjectDetails() {
   };
 
   const modalImageVariants = {
-    hidden: { scale: 0.8, opacity: 0, y: -40 },
+    hidden: { scale: 0.6, opacity: 0, rotateY: -90 },
     visible: {
       scale: 1,
       opacity: 1,
-      y: 0,
+      rotateY: 0,
       transition: { duration: 0.4, type: "spring", stiffness: 100 },
     },
-    exit: { scale: 0.8, opacity: 0, y: 40, transition: { duration: 0.3 } },
+    exit: { scale: 0.6, opacity: 0, rotateY: 90, transition: { duration: 0.3 } },
   };
 
   return (
@@ -102,10 +106,8 @@ export default function ProjectDetails() {
         viewport={{ once: true }}
       >
         {/* كارد المشروع الرئيسي */}
-        <motion.div
-          variants={sectionVariants}
-          className="bg-gray-900/80 rounded-2xl p-8 flex flex-col items-center gap-6 shadow-lg border border-purple-800/50 hover:bg-gray-900/90 transition duration-300"
-        >
+        <motion.div variants={sectionVariants}>
+        <TiltCard max={6} className="bg-gray-900/40 backdrop-blur-xl rounded-2xl p-8 flex flex-col items-center gap-6 border border-white/10 shadow-[0_30px_80px_-30px_rgba(139,92,246,0.7)]">
           {project.image && (
             <motion.div className="h-full w-full flex items-center justify-center overflow-hidden rounded-xl border border-gray-700/50">
               <motion.img
@@ -116,8 +118,8 @@ export default function ProjectDetails() {
             </motion.div>
           )}
 
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-purple-400 mb-4 drop-shadow-lg">
+          <div className="text-center" style={{ transform: "translateZ(40px)" }}>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ textShadow: "0 1px 0 #6d28d9, 0 2px 0 #5b21b6, 0 3px 0 #4c1d95, 0 4px 0 #3b0764, 0 12px 25px rgba(124,58,237,0.6)" }}>
               {project.title}
             </h1>
             <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-6 max-w-2xl">
@@ -146,18 +148,19 @@ export default function ProjectDetails() {
               )}
             </div>
           </div>
+        </TiltCard>
         </motion.div>
 
         {/* Screenshots */}
         {project.screenshots && project.screenshots.length > 0 && (
           <motion.section
             variants={sectionVariants}
-            className="bg-gray-900/70 rounded-2xl shadow-lg p-6 border border-pink-700/50"
+            className="bg-gray-900/40 backdrop-blur-xl rounded-2xl shadow-lg p-6 border border-pink-700/50"
           >
             <h2 className="text-3xl font-bold mb-6 text-pink-400 flex items-center gap-3">
               <FaCamera /> Screenshots
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" style={{ perspective: 1200 }}>
               {project.screenshots.map((src, i) => (
                 <motion.div
                   key={i}
@@ -184,7 +187,7 @@ export default function ProjectDetails() {
         {project.keyFeatures?.length > 0 && (
           <motion.div
             variants={sectionVariants}
-            className="bg-gray-900/70 rounded-2xl p-6 border border-purple-700/50 shadow-lg"
+            className="bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 border border-purple-700/50 shadow-lg"
           >
             <h2 className="text-3xl font-bold mb-4 flex items-center gap-3 text-purple-400">
               <FaCodeBranch /> Key Features
@@ -209,7 +212,7 @@ export default function ProjectDetails() {
         {project.challenges?.length > 0 && (
           <motion.div
             variants={sectionVariants}
-            className="bg-gray-900/70 rounded-2xl p-6 border border-pink-700/50 shadow-lg"
+            className="bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 border border-pink-700/50 shadow-lg"
           >
             <h2 className="text-3xl font-bold mb-4 flex items-center gap-3 text-pink-400">
               <FaPuzzlePiece /> Challenges & Solutions
@@ -234,7 +237,7 @@ export default function ProjectDetails() {
         {project.technologies?.length > 0 && (
           <motion.div
             variants={sectionVariants}
-            className="bg-gray-900/70 rounded-2xl p-6 border border-purple-700/50 shadow-lg"
+            className="bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 border border-purple-700/50 shadow-lg"
           >
             <h2 className="text-3xl font-bold mb-4 flex items-center gap-3 text-purple-400">
               <FaMicrochip /> Technologies
@@ -269,6 +272,7 @@ export default function ProjectDetails() {
             animate="visible"
             exit="exit"
             className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 cursor-pointer"
+            style={{ perspective: 1400 }}
             onClick={() => setModalImage(null)}
           >
             <motion.img

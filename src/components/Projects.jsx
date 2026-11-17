@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { FaCode, FaRocket } from "react-icons/fa";
 import { projects } from "./MyProjectsData";
 import TiltCard from "./three/TiltCard";
+import Heading3D from "./three/Heading3D";
+import InView from "./three/InView";
+import { lazy } from "react";
+
+const MiniScene = lazy(() => import("./three/MiniScene"));
 
 export default function MyProjects() {
   const navigate = useNavigate();
@@ -12,38 +17,20 @@ export default function MyProjects() {
       id="projects"
       className="relative py-16 px-4 lg:px-12 text-gray-100 overflow-hidden mt-0 md:mt-10" // ⬅️ تقليل الـ padding
     >
-      {/* خلفية متحركة - نقاط شهابية متوهجة (تقليل Opacity) */}
-      <div className="absolute inset-0 -z-10 opacity-20 pointer-events-none"> {/* ⬅️ تقليل الشفافية */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-3 h-3 bg-pink-500 rounded-full opacity-30 blur-xl" // ⬅️ تقليل الحجم والتوهج
-            initial={{ 
-              x: `${Math.random() * 100}%`,
-              y: `${Math.random() * 100}%`,
-              scale: 0.5 
-            }}
-            animate={{ 
-              x: `${Math.random() * 100}%`,
-              y: `${Math.random() * 100}%`,
-              scale: 1.2 
-            }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "reverse", 
-              duration: 15 + i * 3, 
-              ease: "easeInOut",
-              delay: i * 2,
-            }}
-          />
-        ))}
-      </div>
-
       {/* العنوان الرئيسي */}
-      <h2 className="text-4xl font-extrabold text-center mb-12 relative z-10 {/* ⬅️ تقليل حجم الخط و الـ margin */}
-                     bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text drop-shadow-lg">
-        My Portfolio Showcase
-      </h2>
+      <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 items-center gap-6 mb-10">
+        <div>
+          <Heading3D as="h1" className="text-5xl md:text-6xl md:text-left">
+            My Portfolio Showcase
+          </Heading3D>
+          <p className="text-gray-400 mt-4 text-center md:text-left">
+            AI platforms, dashboards and consumer websites — move your mouse over a card to see it in 3D.
+          </p>
+        </div>
+        <InView className="h-[260px] md:h-[320px]">
+          <MiniScene variant="crystal" />
+        </InView>
+      </div>
 
       <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto relative z-10"> {/* ⬅️ تقليل الـ gap وعرض max */}
         {/* عرض جميع المشاريع */}

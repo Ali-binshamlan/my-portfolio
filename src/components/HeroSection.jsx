@@ -71,20 +71,18 @@ export default function HeroSection() {
           className="text-purple-300 text-2xl font-bold mb-4 tracking-wider"
           variants={itemVariants}
         >
-          Front-End Developer
+          Front-End Developer (Next.js)
         </motion.p>
 
         <motion.p
           className="text-gray-300 text-lg leading-relaxed mb-8"
           variants={itemVariants}
         >
-          Front-End Developer specialized in Next.js with a proven ability to
-          deliver real, production-level web applications. Skilled in building
-          fast, responsive, and scalable interfaces using React, Tailwind CSS,
-          and modern JavaScript tools. Worked on multiple impactful projects
-          including AI platforms and admin dashboards, showcasing strong
-          problem-solving skills and attention to clean, maintainable code.
-          Driven by performance, user experience, and continuous improvement
+          Front-End Developer with 3+ years of experience building
+          production-level web applications with Next.js, React, and
+          TypeScript. Delivered AI platforms, admin dashboards, and
+          consumer-facing websites — with a strong focus on performance, user
+          experience, and clean, maintainable code.
         </motion.p>
 
         <motion.div className="flex gap-5 flex-wrap" variants={itemVariants}>
@@ -98,7 +96,7 @@ export default function HeroSection() {
           </motion.a>
 
           <motion.a
-            href="https://drive.google.com/file/d/1rN8yjFIdq-siAdwB2Nj7IjIb99Qk7Mlv/view?usp=sharing"
+            href="/Ali-Bin-Shamlan_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.08, y: -2 }}

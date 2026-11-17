@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight, FaCode, FaRocket } from "react-icons/fa";
 import { projects } from "./MyProjectsData";
 import TiltCard from "./three/TiltCard";
+import Heading3D from "./three/Heading3D";
 
 export default function MyProjects() {
   const navigate = useNavigate();
@@ -12,39 +13,7 @@ export default function MyProjects() {
       id="projects"
       className="relative py-16 px-4 lg:px-12 text-gray-100 overflow-hidden" // ⬅️ تقليل padding
     >
-      {/* خلفية متحركة - نقاط شهابية متوهجة (لا تغيير لتبقى مؤثرة) */}
-      <div className="absolute inset-0 -z-10 opacity-30 pointer-events-none">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-4 h-4 bg-pink-500 rounded-full opacity-30 blur-2xl"
-            initial={{
-              x: `${Math.random() * 100}%`,
-              y: `${Math.random() * 100}%`,
-              scale: 0.5,
-            }}
-            animate={{
-              x: `${Math.random() * 100}%`,
-              y: `${Math.random() * 100}%`,
-              scale: 1.2,
-            }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "reverse",
-              duration: 15 + i * 3,
-              ease: "easeInOut",
-              delay: i * 2,
-            }}
-          />
-        ))}
-      </div>
-
-      <h2
-        className="text-4xl font-extrabold text-center mb-12 relative z-10 
-             text-white/90 drop-shadow-lg"
-      >
-        My Creative Portfolio
-      </h2>
+      <Heading3D className="text-5xl mb-14">My Creative Portfolio</Heading3D>
 
       <div className="grid md:grid-cols-2 gap-8 max-w-5xl rounded-2xl mx-auto relative z-10">
         {" "}

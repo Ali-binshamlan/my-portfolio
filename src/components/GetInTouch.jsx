@@ -1,74 +1,62 @@
+import { lazy } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaWhatsapp, FaLinkedin, FaFileAlt } from "react-icons/fa";
+import { FaEnvelope, FaWhatsapp, FaLinkedin, FaFileAlt, FaGithub, FaMapMarkerAlt } from "react-icons/fa";
 import ContactForm from "./ContactForm";
+import TiltCard from "./three/TiltCard";
+import Reveal3D from "./three/Reveal3D";
+import Heading3D from "./three/Heading3D";
+import InView from "./three/InView";
+
+const MiniScene = lazy(() => import("./three/MiniScene"));
+
+const links = [
+  { label: "Email Me", href: "mailto:alishamlan47@gmail.com", icon: FaEnvelope, color: "from-purple-600 to-purple-800", edge: "#3b0764" },
+  { label: "WhatsApp", href: "https://wa.me/966531015711", icon: FaWhatsapp, color: "from-green-600 to-green-800", edge: "#052e16" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/ali-bin-shamlan-ba6237341/", icon: FaLinkedin, color: "from-blue-600 to-blue-800", edge: "#172554" },
+  { label: "GitHub", href: "https://github.com/Ali-binshamlan", icon: FaGithub, color: "from-gray-600 to-gray-800", edge: "#111827" },
+  { label: "Resume", href: "/Ali-Bin-Shamlan_CV.pdf", icon: FaFileAlt, color: "from-pink-600 to-pink-800", edge: "#500724" },
+];
 
 export default function GetInTouch() {
   return (
-    <section
-      id="contact"
-      className="py-20 px-6 lg:px-20 text-gray-100"
-    >
-      <div className="max-w-6xl mx-auto bg-gray-900 rounded-3xl shadow-lg p-12 border border-gray-800">
-        <h2 className="text-4xl font-extrabold text-center text-white mb-14">
-          Get In Touch
-        </h2>
+    <section id="contact" className="relative py-24 px-6 lg:px-20 text-gray-100 md:pt-28">
+      <Heading3D className="text-5xl mb-4">Get In Touch</Heading3D>
+      <p className="flex items-center justify-center gap-2 text-gray-400 mb-6">
+        <FaMapMarkerAlt /> Riyadh, Saudi Arabia
+      </p>
 
-        <div className="flex flex-col md:flex-row justify-between items-start gap-10">
-          {/* نموذج الاتصال */}
-          <div className="flex-1 max-w-md">
-            <ContactForm />
+      <InView className="h-[280px] md:h-[340px] max-w-xl mx-auto">
+        <MiniScene variant="globe" />
+      </InView>
+
+      <Reveal3D className="max-w-6xl mx-auto">
+        <TiltCard max={5} className="rounded-3xl p-8 md:p-12 bg-gray-900/40 backdrop-blur-xl border border-white/10 shadow-[0_30px_80px_-30px_rgba(139,92,246,0.7)]">
+          <div className="flex flex-col md:flex-row justify-between items-stretch gap-10" style={{ transformStyle: "preserve-3d" }}>
+            <div className="flex-1" style={{ transform: "translateZ(30px)" }}>
+              <ContactForm />
+            </div>
+
+            {/* أزرار ثلاثية الأبعاد بحافة سفلية تنضغط عند الضغط */}
+            <div className="flex flex-col gap-5 flex-1 justify-center" style={{ transform: "translateZ(50px)" }}>
+              {links.map(({ label, href, icon: Icon, color, edge }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("http") || href.endsWith(".pdf") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ y: 5, boxShadow: `0 1px 0 ${edge}` }}
+                  style={{ boxShadow: `0 6px 0 ${edge}, 0 15px 30px rgba(0,0,0,0.45)` }}
+                  className={`flex items-center gap-3 bg-gradient-to-b ${color} text-white px-6 py-4 rounded-xl font-semibold border border-white/10`}
+                >
+                  <Icon className="text-xl" />
+                  {label}
+                </motion.a>
+              ))}
+            </div>
           </div>
-
-          {/* أزرار التواصل عمودية */}
-          <div className="flex flex-col gap-6 flex-1 max-w-md">
-            {/* Email */}
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="mailto:ali.binshamlan12@gmail.com"
-              className="flex items-center gap-3 bg-purple-800 text-purple-200 shadow-md border border-purple-700 px-6 py-4 rounded-xl hover:bg-purple-700 transition font-semibold whitespace-nowrap"
-            >
-              <FaEnvelope className="text-xl" />
-              Email Me
-            </motion.a>
-
-            {/* WhatsApp */}
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="https://wa.me/967774945757"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-green-800 text-green-200 shadow-md border border-green-700 px-6 py-4 rounded-xl hover:bg-green-700 transition font-semibold whitespace-nowrap"
-            >
-              <FaWhatsapp className="text-xl" />
-              WhatsApp
-            </motion.a>
-
-            {/* LinkedIn */}
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="https://www.linkedin.com/in/ali-bin-shamlan-ba6237341/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-blue-800 text-blue-200 shadow-md border border-blue-700 px-6 py-4 rounded-xl hover:bg-blue-700 transition font-semibold whitespace-nowrap"
-            >
-              <FaLinkedin className="text-xl" />
-              LinkedIn
-            </motion.a>
-
-            {/* Resume */}
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              href="https://drive.google.com/file/d/18_gnwyhdea0MMuhQLXtNo_1RsUdmvRO-/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-gray-800 text-gray-200 shadow-md border border-gray-700 px-6 py-4 rounded-xl hover:bg-gray-700 transition font-semibold whitespace-nowrap"
-            >
-              <FaFileAlt className="text-xl" />
-              Resume
-            </motion.a>
-          </div>
-        </div>
-      </div>
+        </TiltCard>
+      </Reveal3D>
     </section>
   );
 }

@@ -1,142 +1,99 @@
 // src/components/WorkExperience.jsx
+import { lazy } from "react";
+import { FaBriefcase, FaMapMarkerAlt, FaGraduationCap } from "react-icons/fa";
+import TiltCard from "./three/TiltCard";
+import Reveal3D from "./three/Reveal3D";
+import Heading3D from "./three/Heading3D";
+import InView from "./three/InView";
 
-import { motion } from "framer-motion";
-import { FaBriefcase, FaMapMarkerAlt } from "react-icons/fa";
+const MiniScene = lazy(() => import("./three/MiniScene"));
 
-export default function WorkExperience() {
-  const experience = {
-    company: "RemoteTech",
-    role: "Front-End Developer",
+const timeline = [
+  {
+    type: "work",
+    role: "Front-End Developer (Next.js)",
+    company: "Al-Ehtimam Office for Environmental Consulting",
+    period: "Jul 2026 - Present",
+    location: "Saudi Arabia · Full-time",
+    points: [
+      "Develop and maintain web applications using Next.js and React.js.",
+      "Integrate REST APIs and optimize application performance.",
+    ],
+  },
+  {
+    type: "work",
+    role: "Front-End Developer (Next.js)",
+    company: "Remote · Clients: Tabayyun, Drobi",
     period: "Jan 2023 - Present",
     location: "Remote",
-    description: `
-      Building modern, scalable user interfaces using Next.js and Tailwind CSS. 
-      Collaborating remotely with product designers and backend teams across multiple time zones.
-      Focused on performance, accessibility, and delivering pixel-perfect UIs.
-    `,
-  };
+    points: [
+      "Developed responsive web interfaces for Tabayyun, an AI-powered fraud prevention platform, using Next.js.",
+      "Developed the website for Drobi, a ride-hailing and delivery app in Saudi Arabia.",
+      "Integrated REST APIs and improved application performance.",
+    ],
+  },
+  {
+    type: "edu",
+    role: "Bachelor's Degree in Computer Engineering",
+    company: "Hadramout University",
+    period: "2025",
+    location: "Yemen",
+    points: [],
+  },
+];
 
-  // بيانات عشوائية للنجوم المتلألئة
-  const stars = Array.from({ length: 30 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100 + "%",
-    y: Math.random() * 100 + "%",
-    size: Math.random() * 2 + 1, // حجم بين 1px و 3px
-    duration: Math.random() * 5 + 3, // مدة حركة بين 3 و 8 ثواني
-    delay: Math.random() * 5, // تأخير البدء
-  }));
-
+export default function WorkExperience() {
   return (
-    <section className="relative py-20 px-6 md:px-10 lg:px-20 text-gray-100 overflow-hidden min-h-screen flex flex-col justify-center">
-      {/* خطوط متحركة في الخلفية */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map(
-          (
-            _,
-            i // زيادة عدد الخطوط
-          ) => (
-            <motion.div
-              key={i}
-              className="absolute w-[2px] bg-purple-500/30 blur-xl rounded"
-              initial={{
-                x: `${Math.random() * 100}%`, // توزيع عشوائي أولي
-                y: "-20%", // تبدأ من فوق الشاشة
-                height: `${100 + Math.random() * 50}%`, // ارتفاع عشوائي
-                rotate: Math.random() * 90 - 45, // دوران عشوائي
-              }}
-              animate={{
-                y: "120%", // تتحرك للأسفل
-              }}
-              transition={{
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 10 + Math.random() * 10, // مدة عشوائية أطول
-                ease: "linear",
-                delay: i * 2 + Math.random() * 3, // تأخير عشوائي
-              }}
-            />
-          )
-        )}
+    <section className="relative pt-8 pb-24 px-6 md:px-10 lg:px-20 text-gray-100 overflow-hidden">
+      <Heading3D className="text-5xl mb-16">My Journey</Heading3D>
 
-        {/* نجوم متلألئة في الخلفية */}
-        {stars.map((star) => (
-          <motion.div
-            key={star.id}
-            className="absolute bg-white rounded-full opacity-0"
-            style={{
-              left: star.x,
-              top: star.y,
-              width: star.size,
-              height: star.size,
-              boxShadow: "0 0 5px rgba(255,255,255,0.7)", // توهج بسيط
-            }}
-            animate={{
-              opacity: [0, 1, 0], // تظهر وتختفي
-              scale: [1, 1.2, 1], // تكبر وتصغر قليلا
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: star.duration,
-              delay: star.delay,
-              ease: "easeInOut",
-              repeatDelay: Math.random() * 2, // تأخير عشوائي قبل التكرار
-            }}
-          />
-        ))}
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_380px] gap-10 items-center">
+        {/* خط زمني ثلاثي الأبعاد */}
+        <div className="relative space-y-8 pl-10">
+          <div className="absolute left-3 top-2 bottom-2 w-[3px] rounded bg-gradient-to-b from-purple-500 via-pink-500 to-amber-400 shadow-[0_0_20px_rgba(168,85,247,0.8)]" />
+          {timeline.map((item, i) => {
+            const Icon = item.type === "edu" ? FaGraduationCap : FaBriefcase;
+            return (
+              <Reveal3D key={i} from={i % 2 ? "right" : "left"} delay={i * 0.1}>
+                <div className="relative">
+                  <span className="absolute -left-[38px] top-6 grid place-items-center w-8 h-8 rounded-full bg-gray-950 border-2 border-purple-400 text-purple-300 shadow-[0_0_18px_rgba(168,85,247,0.9)]">
+                    <Icon size={13} />
+                  </span>
+                  <TiltCard max={8} className="rounded-2xl p-7 bg-gray-900/40 backdrop-blur-xl border border-white/10 shadow-[0_25px_60px_-25px_rgba(139,92,246,0.6)]">
+                    <div style={{ transform: "translateZ(40px)" }}>
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
+                        <h3 className="text-2xl font-bold text-white">{item.role}</h3>
+                        <span className="text-sm font-semibold px-3 py-1 rounded-full bg-purple-500/15 text-purple-200 border border-purple-400/30 w-fit">
+                          {item.period}
+                        </span>
+                      </div>
+                      <p className="text-pink-400 font-semibold text-lg">{item.company}</p>
+                      <p className="flex items-center gap-2 text-gray-400 text-sm mt-1 mb-4">
+                        <FaMapMarkerAlt size={12} /> {item.location}
+                      </p>
+                      {item.points.length > 0 && (
+                        <ul className="space-y-2 text-gray-300">
+                          {item.points.map((p, j) => (
+                            <li key={j} className="flex gap-2">
+                              <span className="mt-2 w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0" />
+                              {p}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </TiltCard>
+                </div>
+              </Reveal3D>
+            );
+          })}
+        </div>
+
+        {/* مشهد جيروسكوب ثلاثي الأبعاد */}
+        <InView className="hidden lg:block h-[420px]">
+          <MiniScene variant="gyro" />
+        </InView>
       </div>
-
-      {/* المحتوى الرئيسي */}
-      <h2
-        className="relative text-5xl font-extrabold text-center mb-12 
-             text-white z-10 drop-shadow-lg"
-      >
-        My Journey
-      </h2>
-
-      <motion.div
-        className="relative z-10 bg-gray-800 rounded-xl shadow-2xl p-8 border-l-8 border-purple-500 max-w-4xl mx-auto backdrop-blur-sm" // ظل أعمق وبلور
-        initial={{ opacity: 0, y: 60, scale: 0.95 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.5 }} // تظهر عندما يكون 50% من العنصر مرئياً
-        transition={{ duration: 1, type: "spring", stiffness: 70 }} // حركة زنبركية
-      >
-        {/* تأثير ضوئي خلف الكارد */}
-        <div
-          className="absolute inset-0 -z-10 rounded-xl opacity-20"
-          style={{
-            background:
-              "radial-gradient(circle at 10% 10%, #a78bfa, transparent)",
-          }}
-        ></div>
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
-          <div className="flex items-center gap-3 text-purple-400">
-            <FaBriefcase size={24} /> {/* حجم أكبر للأيقونة */}
-            <h3 className="text-3xl font-bold text-white">
-              {" "}
-              {/* حجم ووزن أكبر للعنوان */}
-              {experience.role}
-            </h3>
-          </div>
-          <p className="text-gray-400 text-sm md:text-base font-semibold italic">
-            {experience.period}
-          </p>
-        </div>
-        <p className="text-purple-500 font-bold mb-2 text-xl">
-          {experience.company}
-        </p>{" "}
-        {/* حجم ووزن أكبر */}
-        <div className="flex items-center gap-2 text-gray-400 text-base mb-6">
-          {" "}
-          {/* حجم أكبر للنص */}
-          <FaMapMarkerAlt size={16} /> {/* حجم أكبر للأيقونة */}
-          <span>{experience.location}</span>
-        </div>
-        <p className="text-gray-200 leading-relaxed whitespace-pre-line text-lg">
-          {" "}
-          {/* لون أفتح وحجم أكبر */}
-          {experience.description}
-        </p>
-      </motion.div>
     </section>
   );
 }

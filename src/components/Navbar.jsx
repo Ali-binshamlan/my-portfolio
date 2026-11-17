@@ -27,7 +27,11 @@ export default function Navbar() {
         className="hidden md:block fixed top-0 left-0 w-full z-50 backdrop-blur-xl py-3 shadow-2xl"
       >
         <div className="flex justify-center">
-          <motion.div className="flex items-center justify-center px-8 border rounded-2xl backdrop-blur-md py-3 w-[500px] shadow-2xl shadow-indigo-500/20">
+          <motion.div
+            style={{ transformPerspective: 800 }}
+            whileHover={{ rotateX: 12, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="flex items-center justify-center px-8 border border-white/15 rounded-2xl bg-gray-900/40 backdrop-blur-md py-3 w-[500px] shadow-[0_10px_0_rgba(30,27,75,0.8),0_25px_50px_-10px_rgba(99,102,241,0.45)]">
             <motion.ul
               className="flex items-center space-x-2 text-white relative"
               initial={{ opacity: 0 }}
