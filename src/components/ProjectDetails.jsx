@@ -25,7 +25,50 @@ const hostOf = (url, fallback) => {
 };
 
 // لابتوب ثلاثي الأبعاد (CSS) تتحرك لقطة الموقع داخل شاشته تلقائياً
-function LaptopMockup({ src, host }) {
+// يختار أطول لقطة (صفحة كاملة) ويمررها داخل الشاشة؛
+// وإذا لم توجد لقطة طويلة يعرض اللقطات بالتناوب مع تقريب بطيء
+function LaptopMockup({ images, host }) {
+  const [ratios, setRatios] = useState(null);
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    let alive = true;
+    Promise.all(
+      images.map(
+        (src) =>
+          new Promise((res) => {
+            const img = new Image();
+            img.onload = () => res({ src, w: img.naturalWidth, h: img.naturalHeight });
+            img.onerror = () => res({ src, w: 1, h: 0 });
+            img.src = src;
+          })
+      )
+    ).then((r) => alive && setRatios(r));
+    return () => {
+      alive = false;
+    };
+  }, [images]);
+
+  // نتجاهل لقطات الجوال الضيقة
+  const desktop = ratios ? ratios.filter((r) => r.w >= 600) : [];
+  const desktopImages = desktop.length ? desktop.map((r) => r.src) : images;
+  let tallIndex = 0;
+  let best = 0;
+  desktop.forEach((r) => {
+    const ratio = r.h / r.w;
+    if (ratio > best) {
+      best = ratio;
+      tallIndex = images.indexOf(r.src);
+    }
+  });
+  const mode = !ratios ? "loading" : best >= 0.9 ? "scroll" : "slides";
+
+  useEffect(() => {
+    if (mode !== "slides" || desktopImages.length < 2) return;
+    const id = setInterval(() => setSlide((i) => (i + 1) % desktopImages.length), 4000);
+    return () => clearInterval(id);
+  }, [mode, desktopImages.length]);
+
   const { scrollY } = useScroll();
   const rotateX = useTransform(scrollY, [0, 500], [12, 30]);
   const rotateY = useTransform(scrollY, [0, 500], [-18, -6]);
@@ -48,11 +91,27 @@ function LaptopMockup({ src, host }) {
               <span className="ml-2 flex-1 truncate rounded bg-gray-800 px-2 text-[10px] leading-4 text-gray-400 font-mono">{host}</span>
             </div>
             <div className="relative aspect-[16/10] overflow-hidden group">
-              <img
-                src={src}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover animate-[screen-scroll_18s_ease-in-out_infinite_alternate] group-hover:[animation-play-state:paused]"
-              />
+              {mode === "scroll" && (
+                <img
+                  src={images[tallIndex]}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover animate-[screen-scroll_18s_ease-in-out_infinite_alternate] group-hover:[animation-play-state:paused]"
+                />
+              )}
+              {mode === "slides" && (
+                <AnimatePresence initial={false}>
+                  <motion.img
+                    key={slide}
+                    src={desktopImages[slide]}
+                    alt=""
+                    initial={{ opacity: 0, scale: 1.12, x: "4%" }}
+                    animate={{ opacity: 1, scale: 1.0, x: "0%" }}
+                    exit={{ opacity: 0 }}
+                    transition={{ opacity: { duration: 0.8 }, scale: { duration: 4.5, ease: "linear" }, x: { duration: 4.5, ease: "linear" } }}
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
+                </AnimatePresence>
+              )}
             </div>
           </div>
         </div>
@@ -324,7 +383,7 @@ export default function ProjectDetails() {
           )}
         </motion.div>
 
-        <LaptopMockup src={images[0]} host={host} />
+        <LaptopMockup key={project.id} images={images} host={host} />
       </section>
 
       {/* ===== المعرض ===== */}
