@@ -49,12 +49,14 @@ function LaptopMockup({ images, host }) {
     };
   }, [images]);
 
-  // نتجاهل لقطات الجوال الضيقة
-  const desktop = ratios ? ratios.filter((r) => r.w >= 600) : [];
+  // نتجاهل لقطات الجوال الضيقة جداً (عرضها أقل من 280 بكسل)
+  const desktop = ratios ? ratios.filter((r) => r.w >= 280) : [];
   const desktopImages = desktop.length ? desktop.map((r) => r.src) : images;
   let tallIndex = 0;
   let best = 0;
-  desktop.forEach((r) => {
+  // نفضّل اللقطات الأوضح (عرض 400 بكسل فأكثر) عند اختيار اللقطة الطويلة
+  const sharp = desktop.filter((r) => r.w >= 400);
+  (sharp.length ? sharp : desktop).forEach((r) => {
     const ratio = r.h / r.w;
     if (ratio > best) {
       best = ratio;

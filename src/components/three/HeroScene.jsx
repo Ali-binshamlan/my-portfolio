@@ -123,10 +123,10 @@ function Head({ headRef }) {
   face.anisotropy = 8;
   const R = 0.37;
   const ARC = 1.8;
-  const height = (R * ARC) / (512 / 694);
+  const height = (R * ARC) / (512 / 786);
   return (
     <group ref={headRef} position={[0, 1.93, -0.2]}>
-      <group position={[0, height / 2 - 0.06, 0]}>
+      <group position={[0, height / 2 - 0.19, 0]}>
         {/* الوجه من الصورة */}
         <mesh position={[0, 0, -R + 0.14]}>
           <cylinderGeometry args={[R, R, height, 40, 1, true, -ARC / 2, ARC]} />

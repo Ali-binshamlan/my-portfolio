@@ -7,6 +7,8 @@ export const projects = [
     "demo": "https://www.drobi.sa/",
     "image": "/Drobi.png",
     "screenshots": [
+      "/screenshots/drobi-full-home.jpg",
+      "/screenshots/drobi-full-captain.jpg",
       "/screenshots/drobi-4.png",
       "/screenshots/drobi-3.png"
     ],
