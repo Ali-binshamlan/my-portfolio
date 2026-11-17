@@ -1,6 +1,6 @@
 import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Sparkles, Text3D, Center, RoundedBox } from "@react-three/drei";
+import { Float, Sparkles, Text3D, Center, RoundedBox, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import fontUrl from "three/examples/fonts/helvetiker_bold.typeface.json?url";
 
@@ -109,7 +109,6 @@ function Limb({ from, to, r = 0.07, children }) {
 }
 
 const SKIN = "#9a6240";
-const SKIN_DARK = "#8a5838";
 const HAIR = "#17110e";
 const NAVY = "#18225e";
 const NAVY_LIGHT = "#223079";
@@ -117,106 +116,23 @@ const BLACK = "#0d0d12";
 
 const toon = (color) => <meshToonMaterial color={color} />;
 
-// شعر مجعّد: كرات صغيرة كثيفة أعلى الرأس وقصير على الجوانب
-function CurlyHair() {
-  const curls = useMemo(() => {
-    const out = [];
-    let seed = 7;
-    const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-    for (let i = 0; i < 110; i++) {
-      const theta = rnd() * Math.PI * 2;
-      const y = 0.05 + rnd() * 0.95; // نصف الكرة العلوي
-      const ring = Math.sqrt(1 - y * y);
-      const x = Math.cos(theta) * ring;
-      const z = Math.sin(theta) * ring;
-      if (z > 0.3 && y < 0.62) continue; // خط الشعر في الجبهة
-      if (Math.abs(x) > 0.75 && y < 0.35) continue; // الجوانب قصيرة
-      const lift = y > 0.45 ? 0.08 + rnd() * 0.09 : 0.0; // حجم أكبر في الأعلى
-      const R = 0.27 + lift;
-      out.push({ p: [x * R * 0.95, y * R * 1.05 + 0.04, z * R * 0.95 - 0.015], s: 0.055 + rnd() * 0.05 });
-    }
-    return out;
-  }, []);
+// الرأس: صورة علي الحقيقية على سطح منحنٍ، وخلفها حجم ثلاثي الأبعاد للرأس والشعر
+function Head({ headRef }) {
+  const face = useTexture("/avatar-face.png");
+  face.colorSpace = THREE.SRGBColorSpace;
+  face.anisotropy = 8;
+  const R = 0.37;
+  const ARC = 1.8;
+  const height = (R * ARC) / (512 / 694);
   return (
-    <group>
-      {curls.map((c, i) => (
-        <mesh key={i} position={c.p} scale={c.s}>
-          <icosahedronGeometry args={[1, 1]} />
-          {toon(HAIR)}
+    <group ref={headRef} position={[0, 1.93, -0.2]}>
+      <group position={[0, height / 2 - 0.06, 0]}>
+        {/* الوجه من الصورة */}
+        <mesh position={[0, 0, -R + 0.14]}>
+          <cylinderGeometry args={[R, R, height, 40, 1, true, -ARC / 2, ARC]} />
+          <meshBasicMaterial map={face} transparent toneMapped={false} side={THREE.DoubleSide} />
         </mesh>
-      ))}
-    </group>
-  );
-}
-
-function Head({ headRef, eyesRef }) {
-  return (
-    <group ref={headRef} position={[0, 2.24, -0.18]} scale={1.32}>
-      {/* الوجه */}
-      <mesh scale={[0.9, 1.06, 0.92]}>
-        <sphereGeometry args={[0.27, 32, 32]} />
-        {toon(SKIN)}
-      </mesh>
-      {/* الأذنان */}
-      {[-1, 1].map((sx) => (
-        <mesh key={sx} position={[sx * 0.245, 0.0, -0.02]} scale={[0.5, 1, 0.7]}>
-          <sphereGeometry args={[0.07, 16, 16]} />
-          {toon(SKIN_DARK)}
-        </mesh>
-      ))}
-      <CurlyHair />
-      {/* العينان */}
-      <group ref={eyesRef} position={[0, 0.035, 0.225]}>
-        {[-1, 1].map((sx) => (
-          <group key={sx} position={[sx * 0.085, 0, 0]}>
-            <mesh scale={[1, 1.15, 0.5]}>
-              <sphereGeometry args={[0.032, 16, 16]} />
-              <meshBasicMaterial color="#1a0f0a" />
-            </mesh>
-            <mesh position={[0.01, 0.012, 0.015]}>
-              <sphereGeometry args={[0.009, 8, 8]} />
-              <meshBasicMaterial color="#ffffff" />
-            </mesh>
-          </group>
-        ))}
       </group>
-      {/* الحاجبان */}
-      {[-1, 1].map((sx) => (
-        <mesh key={sx} position={[sx * 0.088, 0.098, 0.235]} rotation={[0, 0, sx * -0.12]}>
-          <boxGeometry args={[0.1, 0.024, 0.02]} />
-          {toon(HAIR)}
-        </mesh>
-      ))}
-      {/* الأنف */}
-      <mesh position={[0, -0.03, 0.262]} scale={[0.9, 1.1, 1]}>
-        <sphereGeometry args={[0.034, 16, 16]} />
-        {toon(SKIN_DARK)}
-      </mesh>
-      {/* الشارب */}
-      {[-1, 1].map((sx) => (
-        <mesh key={sx} position={[sx * 0.04, -0.085, 0.245]} rotation={[0, 0, Math.PI / 2 + sx * 0.25]}>
-          <capsuleGeometry args={[0.01, 0.055, 4, 8]} />
-          {toon(HAIR)}
-        </mesh>
-      ))}
-      {/* الابتسامة */}
-      <mesh position={[0, -0.112, 0.236]} rotation={[0.15, 0, 0]}>
-        <circleGeometry args={[0.062, 24, Math.PI, Math.PI]} />
-        <meshBasicMaterial color="#fbf6ee" side={THREE.DoubleSide} />
-      </mesh>
-      <mesh position={[0, -0.112, 0.238]} rotation={[0.15, 0, Math.PI]}>
-        <torusGeometry args={[0.062, 0.011, 8, 24, Math.PI]} />
-        <meshBasicMaterial color="#5b2a1c" />
-      </mesh>
-      {/* لحية السكسوكة */}
-      <mesh position={[0, -0.215, 0.19]} scale={[1.2, 0.9, 0.8]}>
-        <sphereGeometry args={[0.04, 16, 16]} />
-        {toon(HAIR)}
-      </mesh>
-      <mesh position={[0, -0.235, 0.12]} scale={[2.6, 0.55, 1.6]}>
-        <sphereGeometry args={[0.05, 16, 16]} />
-        <meshToonMaterial color={HAIR} transparent opacity={0.55} />
-      </mesh>
     </group>
   );
 }
@@ -331,7 +247,6 @@ function DeskLaptop({ tex }) {
 // الشخصية الكرتونية جالسة وتبرمج
 function Coder({ tex }) {
   const head = useRef();
-  const eyes = useRef();
   const leftHand = useRef();
   const rightHand = useRef();
   const torso = useRef();
@@ -344,14 +259,11 @@ function Coder({ tex }) {
     // التنفس
     torso.current.scale.y = 1 + Math.sin(t * 1.8) * 0.012;
     // ينظر للشاشة، وأحياناً يرفع رأسه للزائر ويتبع الماوس
-    const lookUp = THREE.MathUtils.smoothstep(Math.sin(t * 0.45), 0.55, 0.9);
-    const targetX = THREE.MathUtils.lerp(0.32, -0.05 - s.pointer.y * 0.15, lookUp);
-    const targetY = THREE.MathUtils.lerp(Math.sin(t * 0.7) * 0.06, s.pointer.x * 0.45, lookUp);
+    const lookUp = THREE.MathUtils.smoothstep(Math.sin(t * 0.45), -0.2, 0.4);
+    const targetX = THREE.MathUtils.lerp(0.22, -0.04 - s.pointer.y * 0.12, lookUp);
+    const targetY = THREE.MathUtils.lerp(Math.sin(t * 0.7) * 0.06, 0.25 + s.pointer.x * 0.35, lookUp);
     head.current.rotation.x += (targetX - head.current.rotation.x) * 0.08;
     head.current.rotation.y += (targetY - head.current.rotation.y) * 0.08;
-    // رمش العين
-    const blink = t % 3.6 < 0.12 ? 0.1 : 1;
-    eyes.current.scale.y = blink;
   });
 
   return (
@@ -420,7 +332,7 @@ function Coder({ tex }) {
         {toon(BLACK)}
       </mesh>
 
-      <Head headRef={head} eyesRef={eyes} />
+      <Head headRef={head} />
 
       {/* الذراعان واليدان على الكيبورد */}
       {[-1, 1].map((sx) => (
