@@ -7,7 +7,7 @@ import Reveal3D from "./three/Reveal3D";
 import Heading3D from "./three/Heading3D";
 import InView from "./three/InView";
 
-const MiniScene = lazy(() => import("./three/MiniScene"));
+const HologramAvatar = lazy(() => import("./three/HologramAvatar"));
 
 const links = [
   { label: "Email Me", href: "mailto:alishamlan47@gmail.com", icon: FaEnvelope, color: "from-purple-600 to-purple-800", edge: "#3b0764" },
@@ -25,9 +25,21 @@ export default function GetInTouch() {
         <FaMapMarkerAlt /> Riyadh, Saudi Arabia
       </p>
 
-      <InView className="h-[280px] md:h-[340px] max-w-xl mx-auto">
-        <MiniScene variant="globe" />
-      </InView>
+      {/* هولوغرام علي على منصة مضيئة */}
+      <div className="relative max-w-xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.8 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ delay: 1.6, type: "spring", stiffness: 180, damping: 14 }}
+          className="absolute z-10 top-6 right-2 sm:right-6 max-w-[200px] rounded-2xl rounded-bl-sm px-4 py-3 bg-gray-900/80 backdrop-blur border border-purple-400/40 shadow-[0_10px_30px_-10px_rgba(168,85,247,0.7)] text-sm text-gray-100"
+        >
+          Hi! I&apos;m Ali 👋 Let&apos;s build something great together.
+        </motion.div>
+        <InView className="h-[420px] md:h-[520px]">
+          <HologramAvatar />
+        </InView>
+      </div>
 
       <Reveal3D className="max-w-6xl mx-auto">
         <TiltCard max={5} className="rounded-3xl p-8 md:p-12 bg-gray-900/40 backdrop-blur-xl border border-white/10 shadow-[0_30px_80px_-30px_rgba(139,92,246,0.7)]">

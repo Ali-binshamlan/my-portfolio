@@ -110,8 +110,8 @@ function Limb({ from, to, r = 0.07, children }) {
 
 const SKIN = "#9a6240";
 const HAIR = "#17110e";
-const NAVY = "#18225e";
-const NAVY_LIGHT = "#223079";
+const NAVY = "#1c2f8f";
+const NAVY_LIGHT = "#2840a8";
 const BLACK = "#0d0d12";
 
 const toon = (color) => <meshToonMaterial color={color} />;
@@ -121,14 +121,14 @@ function Head({ headRef }) {
   const face = useTexture("/avatar-face.png");
   face.colorSpace = THREE.SRGBColorSpace;
   face.anisotropy = 8;
-  const R = 0.37;
+  const R = 0.3;
   const ARC = 1.8;
   const height = (R * ARC) / (512 / 786);
   return (
     <group ref={headRef} position={[0, 1.93, -0.2]}>
-      <group position={[0, height / 2 - 0.19, 0]}>
+      <group position={[0, height / 2 - 0.16, 0]}>
         {/* الوجه من الصورة */}
-        <mesh position={[0, 0, -R + 0.14]}>
+        <mesh position={[0, 0, -R + 0.11]}>
           <cylinderGeometry args={[R, R, height, 40, 1, true, -ARC / 2, ARC]} />
           <meshBasicMaterial map={face} transparent toneMapped={false} side={THREE.DoubleSide} />
         </mesh>
