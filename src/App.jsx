@@ -11,6 +11,7 @@ import GetInTouch from "./components/GetInTouch";
 import Projects from "./components/Projects";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollProgress from "./components/ScrollProgress";
+import Footer from "./components/Footer";
 import CodeParallax from "./components/CodeParallax";
 
 const SpaceBackground = lazy(() => import("./components/three/SpaceBackground"));
@@ -52,6 +53,7 @@ export default function App() {
         <Route path="/projects/:projectId" element={<ProjectDetails />} />
         <Route path="/Contact" element={<GetInTouch />} />
       </Routes>
+      <Footer />
     </MotionConfig>
   );
 }

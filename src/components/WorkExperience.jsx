@@ -11,7 +11,7 @@ const MiniScene = lazy(() => import("./three/MiniScene"));
 const timeline = [
   {
     type: "work",
-    role: "Front-End Developer (Next.js)",
+    role: "Software Engineer (Next.js)",
     company: "Al-Ehtimam Office for Environmental Consulting",
     period: "Jul 2026 - Present",
     location: "Saudi Arabia · Full-time",
@@ -22,7 +22,7 @@ const timeline = [
   },
   {
     type: "work",
-    role: "Front-End Developer (Next.js)",
+    role: "Software Engineer (Next.js)",
     company: "Remote · Clients: Tabayyun, Drobi",
     period: "Jan 2023 - Present",
     location: "Remote",

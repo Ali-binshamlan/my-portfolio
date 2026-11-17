@@ -81,14 +81,14 @@ export default function HeroSection() {
           className="text-purple-300 text-2xl font-bold mb-4 tracking-wider"
           variants={itemVariants}
         >
-          Front-End Developer (Next.js)
+          Software Engineer (Next.js)
         </motion.p>
 
         <motion.p
           className="text-gray-300 text-base md:text-lg leading-relaxed mb-8"
           variants={itemVariants}
         >
-          Front-End Developer with 3+ years of experience building
+          Software Engineer with 3+ years of experience building
           production-level web applications with Next.js, React, and
           TypeScript. Delivered AI platforms, admin dashboards, and
           consumer-facing websites for clients remotely and in a full-time role
@@ -97,6 +97,24 @@ export default function HeroSection() {
           modern JavaScript tools, with a strong focus on performance, user
           experience, and clean, maintainable code.
         </motion.p>
+
+        <motion.dl variants={itemVariants} className="grid grid-cols-3 gap-3 mb-8 max-w-md" style={{ perspective: 600 }}>
+          {[
+            ["3+", "Years experience"],
+            ["10", "Projects"],
+            ["Next.js", "Specialist"],
+          ].map(([value, label]) => (
+            <motion.div
+              key={label}
+              whileHover={{ rotateX: 12, y: -4 }}
+              className="rounded-xl px-3 py-3 bg-gray-900/50 backdrop-blur border border-white/10 shadow-[0_5px_0_rgba(46,16,101,0.9),0_14px_30px_-10px_rgba(124,58,237,0.5)]"
+            >
+              <dt className="sr-only">{label}</dt>
+              <dd className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">{value}</dd>
+              <dd className="text-[11px] md:text-xs text-gray-400 mt-0.5">{label}</dd>
+            </motion.div>
+          ))}
+        </motion.dl>
 
         <motion.div className="flex gap-5 flex-wrap" variants={itemVariants}>
           <motion.a

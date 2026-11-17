@@ -20,7 +20,7 @@ const CODE = [
   [["// portfolio.tsx", C.cm]],
   [["const ", C.kw], ["developer", C.var], [" = {", C.punc]],
   [["  name", C.prop], [": ", C.punc], ['"Ali Bin Shamlan"', C.str], [",", C.punc]],
-  [["  role", C.prop], [": ", C.punc], ['"Front-End Developer"', C.str], [",", C.punc]],
+  [["  role", C.prop], [": ", C.punc], ['"Software Engineer"', C.str], [",", C.punc]],
   [["  stack", C.prop], [": [", C.punc], ['"Next.js"', C.str], [", ", C.punc], ['"React"', C.str], [", ", C.punc], ['"TS"', C.str], ["],", C.punc]],
   [["  based", C.prop], [": ", C.punc], ['"Riyadh, SA"', C.str], [",", C.punc]],
   [["};", C.punc]],

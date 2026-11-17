@@ -10,3 +10,9 @@ body{
 
 /* إطار تركيز واضح لمستخدمي الكيبورد */
 :focus-visible { outline: 2px solid #a78bfa; outline-offset: 3px; }
+
+/* تمرير لقطة الموقع داخل شاشة اللابتوب */
+@keyframes screen-scroll {
+  0%, 8% { object-position: 50% 0%; }
+  92%, 100% { object-position: 50% 100%; }
+}
