@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const HeroScene = lazy(() => import("./three/HeroScene"));
 import { FaFolderOpen, FaFileAlt } from "react-icons/fa";
@@ -24,6 +24,12 @@ const containerVariants = {
 };
 
 export default function HeroSection() {
+  // النص يرتفع ويتلاشى ويميل للخلف مع التمرير
+  const { scrollY } = useScroll();
+  const textY = useTransform(scrollY, [0, 600], [0, -160]);
+  const textOpacity = useTransform(scrollY, [0, 450], [1, 0]);
+  const textRotX = useTransform(scrollY, [0, 600], [0, 25]);
+
   return (
     <section className="relative flex flex-col md:flex-row items-center justify-center p-6 mx-auto gap-10 text-white min-h-screen overflow-hidden md:pt-24 pb-24 max-w-7xl">
       {/* مشهد ثلاثي الأبعاد تفاعلي */}
@@ -42,6 +48,7 @@ export default function HeroSection() {
       {/* النص مع الأزرار */}
       <motion.div
         className="text-left relative z-10 max-w-xl md:w-1/2"
+        style={{ y: textY, opacity: textOpacity, rotateX: textRotX, transformPerspective: 900 }}
         variants={containerVariants}
         initial="hidden"
         animate="visible"

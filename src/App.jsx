@@ -9,6 +9,8 @@ import MySkills from "./components/MySkills";
 import GetInTouch from "./components/GetInTouch";
 import Projects from "./components/Projects";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollProgress from "./components/ScrollProgress";
+import CodeParallax from "./components/CodeParallax";
 
 const SpaceBackground = lazy(() => import("./components/three/SpaceBackground"));
 
@@ -18,6 +20,7 @@ export default function App() {
       <Suspense fallback={null}>
         <SpaceBackground />
       </Suspense>
+      <ScrollProgress />
       <Navbar />
       <ScrollToTop /> 
       <Routes>
@@ -31,6 +34,7 @@ export default function App() {
               <div className="">
                 <WorkExperience />
               </div>
+              <CodeParallax />
               <div className="">
                 <MyProjects />
               </div>
